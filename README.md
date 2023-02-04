@@ -26,6 +26,8 @@
 ## 設計書
 フロチャート
 　https://app.diagrams.net/#W81ff886c8aeba6f7%2F81FF886C8AEBA6F7!221
+WBSシート
+　https://docs.google.com/spreadsheets/d/1sFRlq2r8iIIIV4p7H9y0jcG-W3EP91u1-Jt-9dmoWRA/edit#gid=1773513600
 
 ## 開発環境
 - OS：Linux(CentOS)
