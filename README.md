@@ -24,10 +24,12 @@
 - 写真から新たなインスピレーションを得たい時
 
 ## 設計書
-フロチャート
-　https://app.diagrams.net/#W81ff886c8aeba6f7%2F81FF886C8AEBA6F7!221
-WBSシート
-　https://docs.google.com/spreadsheets/d/1sFRlq2r8iIIIV4p7H9y0jcG-W3EP91u1-Jt-9dmoWRA/edit#gid=1773513600
+- WBSシート
+   https://docs.google.com/spreadsheets/d/1sFRlq2r8iIIIV4p7H9y0jcG-W3EP91u1-Jt-9dmoWRA/edit#gid=1773513600
+- フロチャート、ワイヤーフレーム、ER図
+   https://app.diagrams.net/#W81ff886c8aeba6f7%2F81FF886C8AEBA6F7!221
+- テーブル定義書、アプリケーション詳細設計書
+   https://docs.google.com/spreadsheets/d/10LkDwoIBsW64pIsu8Xw8rfGlpdKewiI674StUWuuo-I/edit#gid=1071442547
 
 ## 開発環境
 - OS：Linux(CentOS)
