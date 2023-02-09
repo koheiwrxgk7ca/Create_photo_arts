@@ -19,8 +19,6 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
-  
   protected
 
   def user_state

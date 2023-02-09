@@ -1,2 +1,67 @@
-<h1>Public::Photos#new</h1>
-<p>Find me in app/views/public/photos/new.html.erb</p>
+<h3>新規投稿画面</h3>
+
+<%= form_with model:@photo, url: photos_path, local:true do |f| %>
+
+  <div class = "form-group">
+    <%= f.label :image, "写真" %>
+    <%= f.file_field :photo_image, class: "form-control-file item_image", accept: 'image/*' %>
+  </div>
+  <div class = "row">
+    <div class = "col-lg-2">
+      <%= f.label :camera_name, "カメラ名" %><br>
+      <%= f.text_field :camera_name, placeholder: "カメラ名" %>
+    </div>
+    <div class = "col-lg-2">
+      <%= f.label :focal_length, "焦点距離" %><br>
+      <%= f.text_field :focal_length, placeholder: "焦点距離" %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-lg-2">
+      <%= f.label :focal_number, "F値" %><br>
+      <%= f.text_field :focal_number, placeholder: "F値" %>
+    </div>
+    <div class ="col-lg-2">
+      <%= f.label :shutter_speed, "シャッタースピード" %><br>
+      <%= f.text_field :shutter_speed, placeholder: "シャッタースピード" %>
+    </div>
+    <div class = "col-lg-2">
+      <%= f.label :iso, "ISO感度" %><br>
+      <%= f.text_field :iso, placeholder: "ISO感度" %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-lg-2">
+      <%= f.label :accessory, "アクセサリー" %><br>
+      <%= f.text_field :accessory, placeholder: "アクセサリー" %>
+    </div>
+    <div class = "col-lg-2">
+      <%= f.label :edit_pictuer, "編集" %><br>
+      <%= f.select :edit_pictuer, [['なし',0],['あり',1]], { include_blank: true, selected: 0 } %>
+    </div>
+  </div>
+
+　<div class = "row">
+    <div class = "col-lg-2">
+      <%= f.label :prefectures, "都道府県" %><br>
+      <%= f.select :prefectures, Photo.prefectures.keys, {} %>
+    </div>
+    <div class = "col-lg-2">
+      <%= f.label :region, "地域" %><br>
+      <%= f.text_field :region, placeholder: "～付近" %>
+    </div>
+     <div class = "col-lg-2">
+      <%= f.label :tag_relation_id,"タグ" %><br>
+      <%= f.select :tag_relation_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: "選択してください" } %>
+    </div>
+  </div>
+  <br>
+
+  <%= f.text_area :opinion, class:"form-control", rows:"3", placeholder: "コメントここに" %><br>
+
+  <div class="form-group">
+    <%= f.submit "新規投稿", class: 'btn btn-success btn-block' %>
+  </div>
+<% end %>

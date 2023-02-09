@@ -6,9 +6,71 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <header>
+    <!--ヘッダーのナビゲーションメニューとカラースキームの指定-->
+    <!--画面幅によってナビゲーションを折りたたむ-->
+    <nav class="navbar navbar-expand-lg" style="background-color: #DAC3B2;">
+      <div class="container">
+
+        <%= link_to about_path do %>
+         <h1>ロゴ</h1>
+        <% end %>
+
+        <!--ハンバーガーメニューへの切り替え-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon", style="color:#fff;"><i class= "fas fa-list"></i></span>
+        </button>
+
+        <!--ナビゲーションが閉じたり開いたりする動作-->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+
+        <% if user_signed_in? %>
+          <div style="margin: 10px; color: #fff;">Welcome to <%= current_user.name %>！</div>
+            <li style="margin: 10px;">
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to "Photo", photos_path, class: 'nav-link text-dark' %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to "Users", users_path, class: 'nav-link text-dark' %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to "Home", current_user, class: 'nav-link text-dark' %>
+            </li>
+
+        <% elsif admin_signed_in? %>
+            <li style="margin: 10px;">
+              <%= link_to "Log out", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to "Member", admin_top_path, class: 'nav-link text-dark' %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to "Tag", admin_tags_path, class: 'nav-link text-dark' %>
+            </li>
+
+        <% else %>
+            <li style="margin: 10px;">
+              <%=  link_to "Log in", user_session_path, class: 'nav-link text-dark' %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to "Sign up", new_user_registration_path, class: 'nav-link text-dark' %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to "About", about_path, class: 'nav-link text-dark' %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to "Home", root_path, class: 'nav-link text-dark' %>
+            </li>
+        <% end %>
+      </div>
+    </nav>
+  </header>
 
   <body>
     <%= yield %>

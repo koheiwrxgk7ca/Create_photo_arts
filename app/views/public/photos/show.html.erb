@@ -1,2 +1,21 @@
-<h1>Public::Photos#show</h1>
-<p>Find me in app/views/public/photos/show.html.erb</p>
+<h3>投稿詳細</h3>
+<%= @photo.user.name %>
+<div class='row'>
+ <div class='col-5'>
+  <%= image_tag @photo.photo_image, size:"600x400" %>
+ </div>
+ <div class='col-md-4'>
+  カメラ <%= @photo.camera_name %><br>
+  焦点距離 <%= @photo.focal_length %>mm<br>
+  F値 <%= @photo.focal_number %><br>
+  シャッタースピード <%= @photo.shutter_speed %>s<br>
+  ISO感度 <%= @photo.iso %><br>
+  アクセサリー <%= @photo.accessory %><br>
+  編集 <%= @photo.edit_pictuer %><br>
+  <%= @photo.prefectures %>
+  <%= @photo.region %><br>
+  <%= @photo.opinion %><br>
+  <%= @photo.tag_relation_id %><br>
+  ♡～件　　コメント～件
+ </div>
+</div>
