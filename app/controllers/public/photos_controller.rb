@@ -4,10 +4,14 @@ class Public::PhotosController < ApplicationController
   end
 
   def create
-    @photo = Photo.new(photo_params)
-    @photo.user_id = current_user.id
-    @photo.save
-    redirect_to current_user
+       @photo = Photo.new(photo_params)
+       @photo.user_id = current_user.id
+    if @photo.save
+       TagRelation.create(photo_id: @photo.id, tag_id: params[:photo][:tag_id])
+       redirect_to current_user
+    else
+       render :new
+    end
   end
 
   def index
@@ -30,7 +34,7 @@ class Public::PhotosController < ApplicationController
   def update
     @photo = Photo.find(params[:id])
     @photo.update(photo_params)
-    redirect_to photo_path(@photo.id)
+    redirect_to photo_path(@photo)
   end
 
   def destroy
