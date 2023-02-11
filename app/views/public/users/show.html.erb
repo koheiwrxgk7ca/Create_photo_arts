@@ -17,28 +17,32 @@
     </div>
   </div>
 
-  <div class='row'>
-    <div class='col-2'>
-      <!--ユーザーのプロフィール写真-->
-      <%= image_tag @user.get_profile_image, size: '100x100' %><br>
+  <table>
+    <tr>
+      <td>
+        <!--ユーザーのプロフィール写真-->
+        <%= image_tag @user.get_profile_image, size: '100x100' %><br>
+        <!--ユーザーネーム-->
+        <%= @user.name %><br>
+      </td>
+      <td style = "padding-left:30px;">
+        <span style = "margin-left:10px;"><%= @user.photos.count %></span><br>
+        投稿
+      </td>
+      <td style = "padding-left:30px;">
+        <span style = "margin-left:35px;">8</span><br>
+        フォロワー
+      </td>
+      <td style = "padding-left:25px;">
+        <span style = "margin-left:25px;">7</span><br>
+        フォロー
+      </td>
+    </tr>
+  </table>
+  <!--自己紹介文-->
+  <%= @user.introduction %><br>
 
-      <!--ユーザーネーム-->
-      <%= @user.name %><br><br>
 
-      <!--自己紹介文-->
-      <%= @user.introduction %><br>
-    </div>
-
-    <div class='col-md-1'>
-      投稿数
-    </div>
-    <div class='col-md-1'>
-      フォロワー
-    </div>
-    <div class='col-md-1'>
-      フォロー
-    </div>
-  </div><br>
   <!--マイページなら編集リンク、いいね一覧を、他のユーザーならフォローリンクを表示-->
   <% if @user == current_user %>
 
