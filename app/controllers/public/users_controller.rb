@@ -23,9 +23,6 @@ class Public::UsersController < ApplicationController
     redirect_to user_path(@user.id)
   end
 
-  def status
-  end
-
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)

@@ -11,7 +11,6 @@ class Public::PhotosController < ApplicationController
         tag = Tag.find(params[:photo][:tag_id])
         @photo.tags << tag
       end
-      # TagRelation.create!(photo_id: @photo.id, tag_id: params[:photo][:tag_id])
       redirect_to current_user
     else
       render :new
@@ -49,7 +48,12 @@ class Public::PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     @photo.destroy
-    redirect_to current_user
+    # 管理者側から削除した際の遷移先指定
+    if admin_signed_in?
+     redirect_to request.referer
+    else
+     redirect_to current_user
+    end
   end
 
 

@@ -1,2 +1,54 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+  <h3><%= @user.name %>さんの会員情報編集</h3>
+  <%= form_with model:@user, url: admin_user_path, local:true do |f| %>
+   <table style = "margin-left: 30px;">
+     <tr>
+       <th>
+         <p>氏名</p>
+       </th>
+       <td>
+         <p style="padding-left: 30px;"><%= f.text_field :name, class: "form-control last_name" %></P>
+       </td>
+     </tr>
+      <tr>
+        <th>
+          <p>メールアドレス</p>
+        </th>
+        <td>
+          <p style="padding-left: 30px;"><%= f.text_field :email, class: "form-control email" %></p>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <p>会員ステータス</p>
+        </th>
+        <td>
+          <p style="padding-left: 30px;">
+            <%= f.radio_button :is_deleted, :false %>
+            <%= f.label :is_deleted, "有効" %>
+
+            <%= f.radio_button :is_deleted, :true %>
+            <%= f.label :is_deleted, "退会" %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td><p style="padding-left: 30px;"><%= f.submit "変更を保存", class: 'btn btn-success' %></p></td>
+      </tr>
+   </table>
+  <% end %>
+
+  <h3><%= @user.name %>さんの投稿一覧</h3>
+  <% @photos.each do |photo| %>
+    <table style = "margin-left: 30px;">
+      <tr>
+        <td>
+          <%= image_tag photo.photo_image, size:"300x200" %><br>
+          <%= photo.opinion %>
+        </td>
+        <td>
+          <%= link_to "投稿を削除", photo_path(photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    </table>
+  <% end %>

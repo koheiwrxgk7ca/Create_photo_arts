@@ -5,6 +5,7 @@ class Admin::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @photos = @user.photos
   end
 
   def update
@@ -12,12 +13,12 @@ class Admin::UsersController < ApplicationController
     @user.update(user_params)
     redirect_to admin_user_path(@user)
   end
-  
-  
+
+
   private
 
   def user_params
-    params.require(:customer).permit(:name, :email, :is_deleted)
+    params.require(:user).permit(:name, :email, :is_deleted)
   end
 
 end

@@ -1,2 +1,26 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+  <h3>ユーザー一覧画面</h3>
+
+  <table class = "table">
+    <% @users.each do |user| %>
+    <tr>
+      <td>
+        ID <%= user.id %>
+      </td>
+      <td>
+        <%= link_to admin_user_path(user) do %>
+          <%= user.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= user.email %>
+      </td>
+      <td>
+        <% if user.is_deleted == false %>
+         <p class = text-success>有効</p>
+        <% else %>
+         <p class = text-danger>退会</p>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
