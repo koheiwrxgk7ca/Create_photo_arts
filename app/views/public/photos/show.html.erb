@@ -1,38 +1,60 @@
-<h3>投稿詳細</h3>
+  <div class='row'>
+    <div class='col-4'>
+      <h3>投稿詳細</h3>
+    </div>
+    <div class='col-2'>
+      <!--新規投稿画面アイコン-->
+      <%= link_to new_photo_path do %>
+        <h4><i class="fas fa-plus-circle"></i></h4>
+      <% end %>
+    </div>
+  </div>
 
-<%= link_to(@photo.user) do %>
- <%= @photo.user.name %>
-<% end %>
+  <!--ユーザー詳細画面へのリンク-->
+  <p>投稿者
+   <%= link_to(@photo.user) do %>
+    <%= @photo.user.name %>
+   <% end %>
+  </p>
 
-<div class='row'>
- <!--写真の表示-->
- <div class='col-5'>
-  <%= image_tag @photo.photo_image, size:"600x400" %>
- </div>
+  <div class='row'>
+   <!--写真の表示-->
+   <div class='col-5'>
+    <%= image_tag @photo.photo_image, size:"600x400" %>
+   </div>
 
- <!--情報の表示-->
- <div class='col-md-4'>
-  カメラ             <%= @photo.camera_name %><br>
-  焦点距離           <%= @photo.focal_length %>mm<br>
-  F値                <%= @photo.focal_number %><br>
-  シャッタースピード <%= @photo.shutter_speed %>s<br>
-  ISO感度            <%= @photo.iso %><br>
-  アクセサリー       <%= @photo.accessory %><br>
-  編集               <% if @photo.edit_pictuer == false %>
-                      なし
-                     <% else %>
-                      あり
-                     <% end %><br>
-  <!--県の表示-->
-  <%= @photo.prefectures %><br>
-  <!--撮影場所の表示-->
-  <%= @photo.region %><br>
-  <!--コメントの表示-->
-  <%= @photo.opinion %><br>
-  <!--タグの表示-->
-  <% @photo.tag_relations.each do |tag| %>
-   <%= tag.tag.name %>
-  <% end %>
-  ♡～件　　コメント～件
- </div>
-</div>
+   <!--情報の表示-->
+   <div class='col-md-4'>
+    カメラ             <%= @photo.camera_name %><br>
+    焦点距離           <%= @photo.focal_length %>mm<br>
+    F値                <%= @photo.focal_number %><br>
+    シャッタースピード <%= @photo.shutter_speed %>s<br>
+    ISO感度            <%= @photo.iso %><br>
+    アクセサリー       <%= @photo.accessory %><br>
+    編集               <% if @photo.edit_pictuer == false %>
+                        なし
+                       <% else %>
+                        あり
+                       <% end %><br>
+    <!--県の表示-->
+    <%= @photo.prefectures %><br>
+    <!--撮影場所の表示-->
+    <%= @photo.region %><br>
+    <!--コメントの表示-->
+    <%= @photo.opinion %><br>
+    <!--タグの表示-->
+    <% @photo.tag_relations.each do |tag_relation| %>
+     <%= tag_relation.tag.tag_name %>
+    <% end %>
+
+    <!--自分の投稿の場合編集と削除リンクを表示する-->
+    <% if @photo.user == current_user %>
+     <br><br>
+     <%= link_to "Edit", edit_photo_path(@photo.id), class:"btn btn-sm btn-success" %>
+     |
+     <%= link_to "Destroy", photo_path(@photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
+    <% end %><br>
+
+    ♡～件　　コメント～件
+   </div>
+  </div>

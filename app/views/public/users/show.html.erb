@@ -1,2 +1,100 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+  <div class='row'>
+    <div class='col-4'>
+
+      <!--自身のページならマイページを、他のユーザーならユーザーページと表示させる-->
+      <% if @user == current_user %>
+       <h3>Mypage</h3>
+      <% else %>
+       <h3>Userpage</h3>
+      <% end %>
+
+    </div>
+    <div class='col-2'>
+      <!--新規投稿画面アイコン-->
+      <%= link_to new_photo_path do %>
+        <h4><i class="fas fa-plus-circle"></i></h4>
+      <% end %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-2'>
+      <!--ユーザーのプロフィール写真-->
+      <%= image_tag @user.get_profile_image, size: '100x100' %><br>
+
+      <!--ユーザーネーム-->
+      <%= @user.name %><br><br>
+
+      <!--自己紹介文-->
+      <%= @user.introduction %><br>
+    </div>
+
+    <div class='col-md-1'>
+      投稿数
+    </div>
+    <div class='col-md-1'>
+      フォロワー
+    </div>
+    <div class='col-md-1'>
+      フォロー
+    </div>
+  </div><br>
+  <!--マイページなら編集リンク、いいね一覧を、他のユーザーならフォローリンクを表示-->
+  <% if @user == current_user %>
+
+  <div class='row'>
+    <div class='col-md-2'>
+      <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-success" %></p>
+    </div>
+    <div class='col-md-2'>
+      <p>いいね一覧</p>
+    </div>
+  </div>
+
+  <% else %>
+   <p>フォローする</p>
+  <% end %><br>
+
+ <p>投稿一覧</p>
+
+     <!--ユーザーの投稿表示-->
+ <table>
+   <% @photos.each do |photo| %>
+   <tr>
+     <td rowspan = "5">
+       <%= link_to photo_path(photo) do %>
+         <%= image_tag photo.photo_image, size:"300x200" %>
+       <% end %>
+     </td>
+   </tr>
+
+   <tr>
+     <td></td>
+   </tr>
+
+   <!--コメント件数-->
+   <tr>
+     <td>
+       <p>コメント~件</p>
+     </td>
+   </tr>
+
+   <!--いいね件数-->
+   <tr>
+     <td>
+       <p>♡~件</p>
+     </td>
+   </tr>
+
+   <!--タグの表示-->
+   <tr>
+     <td>
+       <p>タグ～</p>
+       <% photo.tag_relations.each do |tag_relation| %>
+        <%= tag_relation.tag.tag_name %>
+       <% end %>
+     </td>
+   </tr>
+
+   <% end %>
+ </table>

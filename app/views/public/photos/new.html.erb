@@ -2,10 +2,12 @@
 
 <%= form_with model:@photo, url: photos_path, local:true do |f| %>
 
+<!--部分テンプレート-->
   <div class = "form-group">
-    <%= f.label :image, "写真" %>
+    <%= f.label :photo_image, "写真" %>
     <%= f.file_field :photo_image, class: "form-control-file item_image", accept: 'image/*' %>
   </div>
+  
   <div class = "row">
     <div class = "col-lg-2">
       <%= f.label :camera_name, "カメラ名" %><br>
@@ -53,14 +55,14 @@
       <%= f.text_field :region, placeholder: "～付近" %>
     </div>
      <div class = "col-lg-2">
-      <%= f.label :tag_relation_id,"タグ" %><br>
-      <%= f.select :tag_relation_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: "選択してください" } %>
+      <%= f.label :tag_id,"タグ" %><br>
+      <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: "選択してください" } %>
     </div>
   </div>
   <br>
 
   <%= f.text_area :opinion, class:"form-control", rows:"3", placeholder: "Opinion" %><br>
-
+<!--ここまで-->
   <div class="form-group">
     <%= f.submit "新規投稿", class: 'btn btn-success btn-block' %>
   </div>
