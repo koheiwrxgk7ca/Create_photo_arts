@@ -1,18 +1,5 @@
-  <div class='row'>
-    <div class='col-4'>
-      <h3>Photos</h3>
-    </div>
-    <div class='col-2'>
-      <!--新規投稿画面アイコン-->
-      <%= link_to new_photo_path do %>
-        <h4><i class="fas fa-plus-circle"></i></h4>
-      <% end %>
-    </div>
-  </div>
-
-  <% @photos.each do |photo| %>
-  <!--部分テンプレート-->
-  <!--ユーザー詳細画面へのリンク-->
+  <h3>いいね一覧画面</h3>
+  <% @favorite_photos.each do |photo|%>
     <p>投稿者
       <%= link_to(photo.user) do %>
        <%= photo.user.name %>
@@ -63,6 +50,4 @@
         </td>
       </tr>
     </table>
-    <!--ここまで-->
   <% end %>
-

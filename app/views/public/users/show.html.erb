@@ -43,7 +43,7 @@
   <%= @user.introduction %><br>
 
 
-  <!--マイページなら編集リンク、いいね一覧を、他のユーザーならフォローリンクを表示-->
+  <!--マイページなら編集リンクを、他のユーザーならフォローリンクを表示-->
   <% if @user == current_user %>
 
   <div class='row'>
@@ -51,12 +51,21 @@
       <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-success" %></p>
     </div>
     <div class='col-md-2'>
-      <p>いいね一覧</p>
+      <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
     </div>
   </div>
 
   <% else %>
-   <p>フォローする</p>
+
+  <div class='row'>
+    <div class='col-md-2'>
+      <p>フォローする</p>
+    </div>
+    <div class='col-md-2'>
+      <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
+    </div>
+  </div>
+
   <% end %><br>
 
  <p>投稿一覧</p>
@@ -86,7 +95,17 @@
    <!--いいね件数-->
    <tr>
      <td>
-       <p>♡~件</p>
+       <% if photo.favorited_by?(current_user) %>
+         <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
+          <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+          <%= photo.favorites.count %> 件
+         <% end %>
+       <% else %>
+         <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
+           <i class="fas fa-heart" aria-hidden="true"></i>
+           <%= photo.favorites.count %> 件
+         <% end %>
+       <% end %>
      </td>
    </tr>
 

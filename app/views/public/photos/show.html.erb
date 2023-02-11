@@ -55,6 +55,16 @@
      <%= link_to "Destroy", photo_path(@photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
     <% end %><br>
 
-    ♡～件　　コメント～件
+    <% if @photo.favorited_by?(current_user) %>
+      <%= link_to photo_favorites_path(@photo.id), method: :delete, remote: true do %>
+       <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+       <%= @photo.favorites.count %> 件
+      <% end %>
+    <% else %>
+      <%= link_to photo_favorites_path(@photo.id), method: :post, remote: true  do %>
+        <i class="fas fa-heart" aria-hidden="true"></i>
+        <%= @photo.favorites.count %> 件
+      <% end %>
+    <% end %>　　コメント～件
    </div>
   </div>

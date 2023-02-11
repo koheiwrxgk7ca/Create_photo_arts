@@ -19,4 +19,7 @@ class Photo < ApplicationRecord
      沖縄県:47
    }
 
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
 end
