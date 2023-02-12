@@ -23,6 +23,8 @@ class Public::PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
+    @photo_comment = Photo.new
+    @comment = Comment.new
   end
 
   def edit

@@ -33,23 +33,24 @@ Rails.application.routes.draw do
     get 'searches/search' => "searches#search", as: "search"
     get 'searches/result' => "searches#result", as: "result"
 
-    get 'relationships/followings' => "relationships#followings", as: "followings"
-    get 'relationships/followers' => "relationships#followers", as: "followers"
-    resource :relationships, only: [:create, :destroy]
-
     resources :photos do
       resource :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
     end
 
-    resources :comments, only: [:create, :destroy]
+    #resources :photos do
+      #resources :comments, only: [:create, :destroy]
+    #end
 
-    resources :photos
 
     # patch 'users/status' => "users#status", as: "status"
     resources :users, only: [:index, :show, :edit, :update] do
       member do
         get :favorites
       end
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
   end
 

@@ -65,6 +65,41 @@
         <i class="fas fa-heart" aria-hidden="true"></i>
         <%= @photo.favorites.count %> 件
       <% end %>
-    <% end %>　　コメント～件
+    <% end %>
+    コメント数：<%= @photo.comments.count %>
    </div>
   </div>
+
+  <div id="comments-area">
+    <table>
+      <% @photo.comments.each do |comment| %>
+        <tr>
+          <td>
+            <%= image_tag comment.user.get_profile_image, size: '50x50' %><br>
+            <%=link_to user_path(comment.user.id) do %>
+              <%= comment.user.name %>
+            <% end %>
+          </td>
+
+          <td>
+            <%= comment.photo_comment %>
+          </td>
+
+          <% if comment.user == current_user %>
+          <td>
+            <%= link_to "削除", photo_comment_path(comment.photo, comment), method: :delete,remote: true %>
+          </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+    <div class="form-group">
+  <label for="newcomment">Comment</label>
+
+ <%= form_with(model:[@photo_comment, @comment], url: photo_comments_path(@photo), local: true) do |f| %>
+  <%= f.text_area :photo_comment, rows:'5',placeholder: "コメントをここに",class:"form-control" %>
+  <%= f.submit "送信する" %>
+ <% end %>
+ </div>
