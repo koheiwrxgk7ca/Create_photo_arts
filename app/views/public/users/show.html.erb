@@ -72,10 +72,16 @@
 
   <% end %><br>
 
- <p>投稿一覧</p>
+  <p>投稿一覧</p>
 
-     <!--ユーザーの投稿表示-->
- <table>
+  <!--検索フォーム-->
+  <%= form_with url: user_path(@user), method: :get, local: true do |f| %>
+    <%= f.select :prefecture, @prefectures, include_blank: "都道府県を選択して下さい" %>
+    <%= f.submit %>
+  <% end %>
+
+  <!--ユーザーの投稿表示-->
+  <table>
    <% @photos.each do |photo| %>
    <tr>
      <td rowspan = "5">
@@ -124,4 +130,4 @@
    </tr>
 
    <% end %>
- </table>
+  </table>

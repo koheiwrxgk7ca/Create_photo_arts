@@ -2,12 +2,18 @@ class Public::UsersController < ApplicationController
   def index
     @users = User.all
     @q = User.ransack(params[:q])
-    @posts = @q.result(distinct: true).includes(:user)
+    @users = @q.result
   end
 
   def show
     @user = User.find(params[:id])
-    @photos = @user.photos
+    if params[:prefecture].present?
+      @photos = @user.photos.where(prefectures: params[:prefecture])
+    else
+      @photos = @user.photos
+    # @photos = @user.photos
+    end
+    @prefectures = Photo.prefectures
   end
 
   def edit
@@ -27,8 +33,14 @@ class Public::UsersController < ApplicationController
 
   def favorites
     @user = User.find(params[:id])
-    favorites= Favorite.where(user_id: @user.id).pluck(:photo_id)
-    @favorite_photos = Photo.find(favorites)
+    favorites = Favorite.where(user_id: @user.id).pluck(:photo_id)
+    # 検索結果表示のための記述
+    if params[:prefecture].present?
+      @favorite_photos = Photo.where(prefectures: params[:prefecture])
+    else
+      @favorite_photos = Photo.find(favorites)
+    end
+    @prefectures = Photo.prefectures
   end
 
 

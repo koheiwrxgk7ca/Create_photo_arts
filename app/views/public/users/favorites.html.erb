@@ -1,4 +1,12 @@
   <h3>いいね一覧画面</h3>
+
+  <!--検索フォーム-->
+  <%= form_with url: favorites_user_path(@user), method: :get, local: true do |f| %>
+    <%= f.select :prefecture, @prefectures, include_blank: "都道府県を選択して下さい" %>
+    <%= f.submit %>
+  <% end %>
+
+  <!--お気に入り投稿一覧-->
   <% @favorite_photos.each do |photo|%>
     <p>投稿者
       <%= link_to(photo.user) do %>
