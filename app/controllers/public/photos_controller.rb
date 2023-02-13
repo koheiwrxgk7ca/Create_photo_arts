@@ -1,4 +1,6 @@
 class Public::PhotosController < ApplicationController
+  # 投稿の検索
+  before_action :set_q, only: [:index, :search]
   def new
     @photo = Photo.new
   end
@@ -19,6 +21,8 @@ class Public::PhotosController < ApplicationController
 
   def index
     @photos = Photo.all
+    # 投稿検索
+    @prefectures = Photo.prefectures
   end
 
   def show
@@ -58,6 +62,10 @@ class Public::PhotosController < ApplicationController
     end
   end
 
+  def search
+    @prefectures = @q.result(distinct: true)
+  end
+
 
   private
 
@@ -65,4 +73,8 @@ class Public::PhotosController < ApplicationController
     params.require(:photo).permit(:user_id, :camera_name, :focal_length, :focal_number, :shutter_speed, :iso, :accessory, :edit_pictuer, :opinion, :prefectures, :region, :photo_image)
   end
 
+  # 投稿検索
+  def set_q
+    @q = Photo.ransack(params[:q])
+  end
 end

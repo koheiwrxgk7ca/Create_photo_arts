@@ -22,4 +22,12 @@ class Photo < ApplicationRecord
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["prefectures", "tag_relation_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["tag_relations", "tags", "user"]
+  end
 end

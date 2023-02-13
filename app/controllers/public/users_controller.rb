@@ -1,6 +1,8 @@
 class Public::UsersController < ApplicationController
   def index
     @users = User.all
+    @q = User.ransack(params[:q])
+    @posts = @q.result(distinct: true).includes(:user)
   end
 
   def show

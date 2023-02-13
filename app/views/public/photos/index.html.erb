@@ -10,6 +10,16 @@
     </div>
   </div>
 
+  <!--検索フォーム-->
+  <%= search_form_for @q, url: photos_path do |f| %>
+  <% @prefectures.each do |prefectures| %>
+  <%= f.check_box :prefectures_eq_any, { multiple: true, include_hidden: false }, prefectures[0] %>
+  <%= f.label prefectures[1] %>
+  <% end %>
+
+  <%= f.submit %>
+  <% end %>
+
   <% @photos.each do |photo| %>
   <!--部分テンプレート-->
   <!--ユーザー詳細画面へのリンク-->

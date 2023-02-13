@@ -35,20 +35,14 @@ Rails.application.routes.draw do
 
     get 'homes/about' => "homes#about", as: "about"
 
-    get 'searches/search' => "searches#search", as: "search"
-    get 'searches/result' => "searches#result", as: "result"
+    # get 'searches/search' => "searches#search", as: "search"
+    # get 'searches/result' => "searches#result", as: "result"
 
     resources :photos do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
 
-    #resources :photos do
-      #resources :comments, only: [:create, :destroy]
-    #end
-
-
-    # patch 'users/status' => "users#status", as: "status"
     resources :users, only: [:index, :show, :edit, :update] do
       member do
         get :favorites

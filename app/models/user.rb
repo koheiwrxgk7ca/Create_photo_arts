@@ -44,4 +44,8 @@ class User < ApplicationRecord
       user.name = "ゲスト次郎"
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name"]
+  end
 end
