@@ -10,9 +10,14 @@
     </div>
   </div>
 
-  <!--検索フォーム-->
+  <!--select2のための記述-->
+  <%= javascript_pack_tag 'public/photos/index' %>
+
   <%= form_with url: photos_path, method: :get, local: true do |f| %>
-    <%= f.select :prefecture, @prefectures, include_blank: "都道府県を選択して下さい" %>
+    <!--都道府県検索フォーム-->
+    <%= f.select :prefecture, @prefectures, include_blank: "都道府県検索" %>
+    <!--タグ検索フォーム-->
+    <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: "タグ検索" } %>
     <%= f.submit %>
   <% end %>
 
