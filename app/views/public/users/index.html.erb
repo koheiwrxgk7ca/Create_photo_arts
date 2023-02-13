@@ -11,11 +11,13 @@
     </div>
   </div>
 
-  <p>ユーザー検索</p>
+  <!--ユーザー検索-->
+  <!--部分テンプレート-->
   <%= search_form_for @q, url: users_path do |f| %>
-   <%= f.search_field :name_cont, placeholder: 'ユーザー名' %>
+   <%= f.search_field :name_cont, placeholder: 'ユーザー検索' %>
    <%= f.submit %>
   <% end %>
+  <!--ここまで-->
 
 <!--部分テンプレート-->
   <table class = "table">
@@ -42,4 +44,3 @@
     <% end %>
   </table>
 <!--ここまで-->
-

@@ -1,15 +1,17 @@
   <div class='row'>
     <div class='col-6'>
-
       <h3>Followings <%= @user.name %></h3>
-
     </div>
     <div class='col-4'>
-
       <%=link_to"Follower list",user_followers_path, class:"btn btn-sm btn-success" %>
-
     </div>
   </div>
+
+  <!--ユーザー検索-->
+  <%= search_form_for @q, url: user_followings_path do |f| %>
+   <%= f.search_field :name_cont, placeholder: 'ユーザー検索' %>
+   <%= f.submit %>
+  <% end %>
 
   <table class = "table">
     <% @users.each do |user| %>

@@ -11,13 +11,9 @@
   </div>
 
   <!--検索フォーム-->
-  <%= search_form_for @q, url: photos_path do |f| %>
-  <% @prefectures.each do |prefectures| %>
-  <%= f.check_box :prefectures_eq_any, { multiple: true, include_hidden: false }, prefectures[0] %>
-  <%= f.label prefectures[1] %>
-  <% end %>
-
-  <%= f.submit %>
+  <%= form_with url: photos_path, method: :get, local: true do |f| %>
+    <%= f.select :prefecture, @prefectures, include_blank: "都道府県を選択して下さい" %>
+    <%= f.submit %>
   <% end %>
 
   <% @photos.each do |photo| %>
@@ -75,4 +71,3 @@
     </table>
     <!--ここまで-->
   <% end %>
-

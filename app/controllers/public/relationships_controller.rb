@@ -15,11 +15,15 @@ class Public::RelationshipsController < ApplicationController
     @user = User.find(params[:user_id])
     user = User.find(params[:user_id])
     @users = user.followings
+    @q = user.followings.ransack(params[:q])
+    @users = @q.result
   end
 
   def followers
     @user = User.find(params[:user_id])
     user = User.find(params[:user_id])
     @users = user.followers
+    @q = user.followers.ransack(params[:q])
+    @users = @q.result
   end
 end
