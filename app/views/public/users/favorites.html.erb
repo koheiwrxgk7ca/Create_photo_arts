@@ -1,9 +1,17 @@
   <h3>いいね一覧画面</h3>
-
   <!--検索フォーム-->
   <%= form_with url: favorites_user_path(@user), method: :get, local: true do |f| %>
-    <%= f.select :prefecture, @prefectures, include_blank: "都道府県を選択して下さい" %>
-    <%= f.submit %>
+    <div class="form-row">
+      <div class="col">
+        <%= f.select :prefecture, @prefectures, { include_blank: "都道府県を選択して下さい", selected: params[:prefecture] }, { class: "form-control" } %>
+      </div>
+      <div class="col">
+        <%= f.collection_select :tag_id, Tag.all, :id, :tag_name, { include_blank: "タグ検索", selected: params[:tag_id] }, { class: "form-control" } %>
+      </div>
+      <div class="col">
+        <%= f.submit "検索する", class: "btn btn-primary" %>
+      </div>
+    </div>
   <% end %>
 
   <!--お気に入り投稿一覧-->

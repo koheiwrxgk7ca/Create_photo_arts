@@ -13,12 +13,19 @@
   <!--select2のための記述-->
   <%= javascript_pack_tag 'public/photos/index' %>
 
+  <!--検索フォーム-->
   <%= form_with url: photos_path, method: :get, local: true do |f| %>
-    <!--都道府県検索フォーム-->
-    <%= f.select :prefecture, @prefectures, include_blank: "都道府県検索" %>
-    <!--タグ検索フォーム-->
-    <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: "タグ検索" } %>
-    <%= f.submit %>
+    <div class="form-row">
+      <div class="col">
+        <%= f.select :prefecture, @prefectures, { include_blank: "都道府県を選択して下さい", selected: params[:prefecture] }, { class: "form-control" } %>
+      </div>
+      <div class="col">
+        <%= f.collection_select :tag_id, Tag.all, :id, :tag_name, { include_blank: "タグ検索", selected: params[:tag_id] }, { class: "form-control" } %>
+      </div>
+      <div class="col">
+        <%= f.submit "検索する", class: "btn btn-primary" %>
+      </div>
+    </div>
   <% end %>
 
   <% @photos.each do |photo| %>
