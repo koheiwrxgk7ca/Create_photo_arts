@@ -19,13 +19,18 @@ class Public::PhotosController < ApplicationController
   end
 
   def index
-    if params[:prefecture].present?
+    if params[:prefecture]&&params[:tag_id].present?
+      @photos = Photo.where(prefectures: params[:prefecture]).where(tag_relations: params[:tag_id])
+    elsif params[:prefecture].present?
       @photos = Photo.where(prefectures: params[:prefecture])
+    elsif params[:tag_id].present?
+      @photos = Photo.where(tag_relations: params[:tag_id])
     else
       @photos = Photo.all
     end
     # 都道府県検索
     @prefectures = Photo.prefectures
+    # @tags = Tag.all
   end
 
   def show

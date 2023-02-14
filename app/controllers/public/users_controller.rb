@@ -11,7 +11,6 @@ class Public::UsersController < ApplicationController
       @photos = @user.photos.where(prefectures: params[:prefecture])
     else
       @photos = @user.photos
-    # @photos = @user.photos
     end
     @prefectures = Photo.prefectures
   end
