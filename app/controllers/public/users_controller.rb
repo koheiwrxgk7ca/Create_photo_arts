@@ -7,12 +7,10 @@ class Public::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    if params[:prefecture].present?
-      @photos = @user.photos.where(prefectures: params[:prefecture])
-    else
-      @photos = @user.photos
-    end
+    @user = User.includes(:photos).find(params[:id])
+    @photos = @user.photos.includes(:tags)
+    @photos = @photos.where(prefectures: params[:prefecture]) if params[:prefecture].present?
+    @photos = @photos.where(tags: {id: params[:tag_id]}) if params[:tag_id].present?
     @prefectures = Photo.prefectures
   end
 
@@ -35,8 +33,14 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:photo_id)
     # 検索結果表示のための記述
-    if params[:prefecture].present?
+    if params[:prefecture].present?&&params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      @favorite_photos = @tag.photos.where(prefectures: params[:prefecture])
+    elsif params[:prefecture].present?
       @favorite_photos = Photo.where(prefectures: params[:prefecture])
+    elsif params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      @favorite_photos = @tag.photos
     else
       @favorite_photos = Photo.find(favorites)
     end

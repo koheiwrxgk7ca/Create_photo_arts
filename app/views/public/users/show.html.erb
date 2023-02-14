@@ -1,14 +1,13 @@
   <div class='row'>
     <div class='col-4'>
-
       <!--自身のページならマイページを、他のユーザーならユーザーページと表示させる-->
       <% if @user == current_user %>
        <h3>Mypage</h3>
       <% else %>
        <h3>Userpage</h3>
       <% end %>
-
     </div>
+
     <div class='col-2'>
       <!--新規投稿画面アイコン-->
       <%= link_to new_photo_path do %>
@@ -17,117 +16,106 @@
     </div>
   </div>
 
-  <table>
-    <tr>
-      <td>
-        <!--ユーザーのプロフィール写真-->
-        <%= image_tag @user.get_profile_image, size: '100x100' %><br>
-        <!--ユーザーネーム-->
-        <%= @user.name %><br>
-      </td>
-      <td style = "padding-left:30px;">
-        <span style = "margin-left:10px;"><%= @user.photos.count %></span><br>
-        投稿
-      </td>
-      <td style = "padding-left:30px;">
-        <span style = "margin-left:35px;"><%= @user.followers.count %></span><br>
-        <%=link_to"フォロワー",user_followers_path(@user) %>
-      </td>
-      <td style = "padding-left:25px;">
-        <span style = "margin-left:25px;"><%= @user.followings.count %></span><br>
-        <%=link_to"フォロー",user_followings_path(@user) %>
-      </td>
-    </tr>
-  </table>
-  <!--自己紹介文-->
-  <%= @user.introduction %><br>
+  <div class="row">
+    <div class="col-sm=5 col-md-4">
 
+      <!--ユーザーのプロフィール写真-->
+      <%= image_tag @user.get_profile_image, size: '100x100' %><br>
+      <!--ユーザーネーム-->
+      <%= @user.name %><br>
 
-  <!--マイページなら編集リンクを、他のユーザーならフォローリンクを表示-->
-  <% if @user == current_user %>
+      <div class="mr-4">
+        <div class="d-flex justify-content-between">
+          <span>投稿</span>
+          <span><%= @user.photos.count %></span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span><%=link_to"フォロワー",user_followers_path(@user) %></span>
+          <span><%= @user.followers.count %></span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span><%=link_to"フォロー",user_followings_path(@user) %></span>
+          <span><%= @user.followings.count %></span>
+        </div>
+      </div>
 
-  <div class='row'>
-    <div class='col-md-2'>
-      <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-success" %></p>
-    </div>
-    <div class='col-md-2'>
-      <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
-    </div>
-  </div>
+      <!--自己紹介文-->
+      <%= @user.introduction %><br>
 
-  <% else %>
-
-  <div class='row'>
-    <div class='col-md-2'>
-      <% if current_user.following?(@user) %>
-        <p><%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete, class:"btn btn-sm btn-success" %></p>
+      <!--マイページなら編集リンクを、他のユーザーならフォローリンクを表示-->
+      <% if @user == current_user %>
+        <div class='row'>
+          <div class='col-sm-6'>
+            <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-success" %></p>
+          </div>
+          <div class='col-md-6'>
+            <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
+          </div>
+        </div>
       <% else %>
-        <p><%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class:"btn btn-sm btn-success" %></p>
+        <div class='row'>
+          <div class='col-md-5 mx-2'>
+            <% if current_user.following?(@user) %>
+              <p><%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete, class:"btn btn-sm btn-success btn-block" %></p>
+            <% else %>
+              <p><%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class:"btn btn-sm btn-success btn-block" %></p>
+            <% end %>
+          </div>
+          <div class='col-md-5 mx-2'>
+            <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success btn-block" %></p>
+          </div>
+        </div>
+      <% end %><br>
+
+      <p>投稿一覧</p>
+      <!--検索フォーム-->
+      <%= form_with url: user_path(@user), method: :get, local: true do |f| %>
+        <div class="form-row">
+          <div class="col">
+            <%= f.select :prefecture, @prefectures, { include_blank: "都道府県を選択して下さい", selected: params[:prefecture] }, { class: "form-control" } %>
+          </div>
+          <div class="col">
+            <%= f.collection_select :tag_id, Tag.all, :id, :tag_name, { include_blank: "タグ検索", selected: params[:tag_id] }, { class: "form-control" } %>
+          </div>
+          <div class="col">
+            <%= f.submit "検索する", class: "btn btn-primary" %>
+          </div>
+        </div>
       <% end %>
     </div>
-    <div class='col-md-2'>
-      <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
+
+
+
+    <div class="col-sm-4 col-md-8">
+      <!--ユーザーの投稿表示-->
+       <% @photos.each do |photo| %>
+       <table>
+         <tr>
+           <td>
+             <%= link_to photo_path(photo) do %>
+               <%= image_tag photo.photo_image, size:"300x200" %>
+             <% end %><br>
+             <!--いいね件数-->
+             <% if photo.favorited_by?(current_user) %>
+               <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
+                  <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+                  <%= photo.favorites.count %>
+               <% end %>
+             <% else %>
+               <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
+                 <i class="fas fa-heart" aria-hidden="true"></i>
+                 <%= photo.favorites.count %>
+               <% end %>
+             <% end %>
+             <!--コメント件数-->
+             <i class="far fa-comment-dots"></i>
+             <%= photo.comments.count %>
+           </td>
+         </tr>
+       </table>
+       <% end %>
     </div>
   </div>
 
-  <% end %><br>
 
-  <p>投稿一覧</p>
 
-  <!--検索フォーム-->
-  <%= form_with url: user_path(@user), method: :get, local: true do |f| %>
-    <%= f.select :prefecture, @prefectures, include_blank: "都道府県を選択して下さい" %>
-    <%= f.submit %>
-  <% end %>
-
-  <!--ユーザーの投稿表示-->
-  <table>
-   <% @photos.each do |photo| %>
-   <tr>
-     <td rowspan = "5">
-       <%= link_to photo_path(photo) do %>
-         <%= image_tag photo.photo_image, size:"300x200" %>
-       <% end %>
-     </td>
-   </tr>
-
-   <tr>
-     <td></td>
-   </tr>
-
-   <!--コメント件数-->
-   <tr>
-     <td>
-       コメント数：<%= photo.comments.count %>
-     </td>
-   </tr>
-
-   <!--いいね件数-->
-   <tr>
-     <td>
-       <% if photo.favorited_by?(current_user) %>
-         <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
-          <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
-          <%= photo.favorites.count %> 件
-         <% end %>
-       <% else %>
-         <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
-           <i class="fas fa-heart" aria-hidden="true"></i>
-           <%= photo.favorites.count %> 件
-         <% end %>
-       <% end %>
-     </td>
-   </tr>
-
-   <!--タグの表示-->
-   <tr>
-     <td>
-       <p>タグ～</p>
-       <% photo.tag_relations.each do |tag_relation| %>
-        <%= tag_relation.tag.tag_name %>
-       <% end %>
-     </td>
-   </tr>
-
-   <% end %>
-  </table>

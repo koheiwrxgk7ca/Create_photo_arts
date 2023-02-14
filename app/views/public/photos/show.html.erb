@@ -95,10 +95,11 @@
     </table>
   </div>
 
-  <% if @photo_comment.errors.any? %>
-  <%= @photo_comment.errors.count %>件のエラー
+  <!--コメントのエラーメッセージ表示-->
+  <% if @comment.errors.any? %>
+  <%= @comment.errors.count %>件のエラー
   <ul>
-    <% @photo_comment.errors.full_messages.each do |message| %>
+    <% @comment.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
