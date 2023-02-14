@@ -19,6 +19,15 @@ class Photo < ApplicationRecord
      沖縄県:47
    }
 
+
+  validates :photo_image, presence: true
+  validates :focal_length, presence: true
+  validates :focal_number, presence: true
+  validates :shutter_speed, presence: true
+  validates :iso, presence: true
+  validates :accessory, presence: true
+  validates :opinion, length: { maximum: 100 }
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

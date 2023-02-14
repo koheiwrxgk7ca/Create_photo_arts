@@ -1,42 +1,52 @@
 <h3>新規投稿画面</h3>
 
+<% if @photo.errors.any? %>
+  <%= @photo.errors.count %>件のエラー
+  <ul>
+    <% @photo.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model:@photo, url: photos_path, local:true do |f| %>
 
+<p>※は入力必須です</p>
 <!--部分テンプレート-->
   <div class = "form-group">
-    <%= f.label :photo_image, "写真" %>
-    <%= f.file_field :photo_image, class: "form-control-file item_image", accept: 'image/*' %>
+    <%= f.label :photo_image, "※写真" %>
+    <%= f.file_field :photo_image, class: "form-control-file photo_image", accept: 'image/*'%>
   </div>
-  
+
   <div class = "row">
     <div class = "col-lg-2">
       <%= f.label :camera_name, "カメラ名" %><br>
       <%= f.text_field :camera_name, placeholder: "カメラ名" %>
     </div>
     <div class = "col-lg-2">
-      <%= f.label :focal_length, "焦点距離" %><br>
+      <%= f.label :focal_length, "※焦点距離" %><br>
       <%= f.text_field :focal_length, placeholder: "焦点距離" %>
     </div>
   </div>
 
   <div class = "row">
     <div class = "col-lg-2">
-      <%= f.label :focal_number, "F値" %><br>
+      <%= f.label :focal_number, "※F値" %><br>
       <%= f.text_field :focal_number, placeholder: "F値" %>
     </div>
     <div class ="col-lg-2">
-      <%= f.label :shutter_speed, "シャッタースピード" %><br>
+      <%= f.label :shutter_speed, "※シャッタースピード" %><br>
       <%= f.text_field :shutter_speed, placeholder: "シャッタースピード" %>
     </div>
     <div class = "col-lg-2">
-      <%= f.label :iso, "ISO感度" %><br>
+      <%= f.label :iso, "※ISO感度" %><br>
       <%= f.text_field :iso, placeholder: "ISO感度" %>
     </div>
   </div>
 
   <div class = "row">
     <div class = "col-lg-2">
-      <%= f.label :accessory, "アクセサリー" %><br>
+      <%= f.label :accessory, "※アクセサリー" %><br>
       <%= f.text_field :accessory, placeholder: "アクセサリー" %>
     </div>
     <div class = "col-lg-2">
@@ -61,7 +71,7 @@
   </div>
   <br>
 
-  <%= f.text_area :opinion, class:"form-control", rows:"3", placeholder: "Opinion" %><br>
+  <%= f.text_area :opinion, class:"form-control", rows:"3", placeholder: "Text" %><br>
 <!--ここまで-->
   <div class="form-group">
     <%= f.submit "新規投稿", class: 'btn btn-success btn-block' %>
