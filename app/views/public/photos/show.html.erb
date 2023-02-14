@@ -95,6 +95,15 @@
     </table>
   </div>
 
+  <% if @photo_comment.errors.any? %>
+  <%= @photo_comment.errors.count %>件のエラー
+  <ul>
+    <% @photo_comment.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
   <!--コメント投稿フォーム-->
   <div class="form-group">
    <label for="newcomment">Comment</label>

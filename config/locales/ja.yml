@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    attributes:
+      photo:
+        photo_image: 画像
+        focal_length: 焦点距離
+        focal_number: F値
+        shutter_speed: シャッタースピード
+        iso: ISO
+        accessory: アクセサリー
+        opinion: テキスト
+      comment:
+        photo_comment: コメント

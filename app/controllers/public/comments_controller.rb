@@ -1,10 +1,14 @@
 class Public::CommentsController < ApplicationController
+  before_action :authenticate_user!
   def create
     photo = Photo.find(params[:photo_id])
     photo_comment = current_user.comments.new(comment_params)
     photo_comment.photo_id = photo.id
-    photo_comment.save
-    redirect_to request.referer
+    if photo_comment.save
+      redirect_to request.referer
+    else
+      render phot_path(@photo.id)
+    end
   end
 
   def destroy
