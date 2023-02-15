@@ -64,9 +64,10 @@
       <%= f.label :region, "地域" %><br>
       <%= f.text_field :region, placeholder: "～付近" %>
     </div>
+
      <div class = "col-lg-2">
       <%= f.label :tag_id,"タグ" %><br>
-      <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: "選択してください" } %>
+      <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: "タグ選択"} %>
     </div>
   </div>
   <br>

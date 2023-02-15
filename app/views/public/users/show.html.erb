@@ -1,5 +1,5 @@
   <div class='row'>
-    <div class='col-4'>
+    <div class='col-sm-10'>
       <!--自身のページならマイページを、他のユーザーならユーザーページと表示させる-->
       <% if @user == current_user %>
        <h3>Mypage</h3>
@@ -8,7 +8,7 @@
       <% end %>
     </div>
 
-    <div class='col-2'>
+    <div class='col-md-1'>
       <!--新規投稿画面アイコン-->
       <%= link_to new_photo_path do %>
         <h4><i class="fas fa-plus-circle"></i></h4>
@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class='row'>
     <div class="col-sm=5 col-md-4">
 
       <!--ユーザーのプロフィール写真-->
@@ -65,8 +65,13 @@
             <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success btn-block" %></p>
           </div>
         </div>
-      <% end %><br>
+      <% end %>
+    </div>
+  </div>
 
+
+  <div class='row'>
+    <div class="col-sm=5 col-md-4">
       <p>投稿一覧</p>
       <!--検索フォーム-->
       <%= form_with url: user_path(@user), method: :get, local: true do |f| %>
@@ -83,39 +88,35 @@
         </div>
       <% end %>
     </div>
-
-
-
-    <div class="col-sm-4 col-md-8">
-      <!--ユーザーの投稿表示-->
-       <% @photos.each do |photo| %>
-       <table>
-         <tr>
-           <td>
-             <%= link_to photo_path(photo) do %>
-               <%= image_tag photo.photo_image, size:"300x200" %>
-             <% end %><br>
-             <!--いいね件数-->
-             <% if photo.favorited_by?(current_user) %>
-               <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
-                  <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
-                  <%= photo.favorites.count %>
-               <% end %>
-             <% else %>
-               <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
-                 <i class="fas fa-heart" aria-hidden="true"></i>
-                 <%= photo.favorites.count %>
-               <% end %>
-             <% end %>
-             <!--コメント件数-->
-             <i class="far fa-comment-dots"></i>
-             <%= photo.comments.count %>
-           </td>
-         </tr>
-       </table>
-       <% end %>
-    </div>
   </div>
 
-
-
+      <!--ユーザーの投稿表示-->
+  <div class='row'>
+    <% @photos.each do |photo| %>
+      <div class="card shadow-sm" style="width: 330px; float: left; margin: 5px 5px 5px 0; padding: 15px;">
+          <%= link_to photo_path(photo) do %>
+            <%= image_tag photo.photo_image, size:"300x200" %>
+          <% end %>
+          <!--いいね件数-->
+          <div class = 'row'>
+            <div class = 'col'>
+            <% if photo.favorited_by?(current_user) %>
+              <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
+                 <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+                 <%= photo.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
+                <i class="fas fa-heart" aria-hidden="true"></i>
+                <%= photo.favorites.count %>
+              <% end %>
+            <% end %>
+            </div>
+            <!--コメント件数-->
+            <div class = 'col'>
+            <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+            </div>
+          </div>
+       </div>
+    <% end %>
+  </div>
