@@ -12,11 +12,15 @@
   <header>
     <!--ヘッダーのナビゲーションメニューとカラースキームの指定-->
     <!--画面幅によってナビゲーションを折りたたむ-->
-    <nav class="navbar navbar-expand-lg" style="background-color: #DAC3B2;">
+    <nav class="navbar navbar-expand-lg" style="background-color: #C0C0C0;">
       <div class="container">
 
         <%= link_to about_path do %>
-         <h1>ロゴ</h1>
+         <%= image_tag 'logo.png', alt: 'logo用画像', size: '100x100' %>
+        <% end %>
+
+        <% if user_signed_in? %>
+          <div style="margin: 10px; color: #fff;">Welcome to <%= current_user.name %>！</div>
         <% end %>
 
         <!--ハンバーガーメニューへの切り替え-->
@@ -29,7 +33,6 @@
         <ul class="navbar-nav ml-auto">
 
         <% if user_signed_in? %>
-          <div style="margin: 10px; color: #fff;">Welcome to <%= current_user.name %>！</div>
             <li style="margin: 10px;">
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
             </li>
@@ -71,10 +74,14 @@
       </div>
     </nav>
   </header>
-
+<div style="background-color:	white">
   <body>
     <div class="container">
-       <%= yield %>
+
+        <%= yield %>
+
     </div>
   </body>
+
 </html>
+</div>
