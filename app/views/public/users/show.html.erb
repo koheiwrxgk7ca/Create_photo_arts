@@ -16,13 +16,12 @@
     </div>
   </div>
 
-  <div class='row'>
-    <div class="col-sm=5 col-md-4">
-
+  <div class='row align-items-end'>
+    <div class="col-sm=5 col-md-10 col-lg-4">
       <!--ユーザーのプロフィール写真-->
       <%= image_tag @user.get_profile_image, size: '100x100' %><br>
       <!--ユーザーネーム-->
-      <%= @user.name %><br>
+      <%= @user.name %><br><br>
 
       <div class="mr-4">
         <div class="d-flex justify-content-between">
@@ -40,8 +39,10 @@
       </div>
 
       <!--自己紹介文-->
-      <%= @user.introduction %><br>
+      <%= @user.introduction %>
+      </div>
 
+      <div class ='col-lg-6'>
       <!--マイページなら編集リンクを、他のユーザーならフォローリンクを表示-->
       <% if @user == current_user %>
         <div class='row'>
@@ -66,18 +67,13 @@
           </div>
         </div>
       <% end %>
-    </div>
-  </div>
 
-
-  <div class='row'>
-    <div class="col-sm=5 col-md-4">
       <p>投稿一覧</p>
       <!--検索フォーム-->
       <%= form_with url: user_path(@user), method: :get, local: true do |f| %>
         <div class="form-row">
           <div class="col">
-            <%= f.select :prefecture, @prefectures, { include_blank: "都道府県を選択して下さい", selected: params[:prefecture] }, { class: "form-control" } %>
+            <%= f.select :prefecture, @prefectures, { include_blank: "都道府県検索", selected: params[:prefecture] }, { class: "form-control" } %>
           </div>
           <div class="col">
             <%= f.collection_select :tag_id, Tag.all, :id, :tag_name, { include_blank: "タグ検索", selected: params[:tag_id] }, { class: "form-control" } %>
@@ -89,34 +85,37 @@
       <% end %>
     </div>
   </div>
+  <br>
 
-      <!--ユーザーの投稿表示-->
-  <div class='row'>
+  <!--ユーザーの投稿表示-->
+  <div class='row '>
+    <div class = 'col'>
     <% @photos.each do |photo| %>
       <div class="card shadow-sm" style="width: 330px; float: left; margin: 5px 5px 5px 0; padding: 15px;">
-          <%= link_to photo_path(photo) do %>
-            <%= image_tag photo.photo_image, size:"300x200" %>
-          <% end %>
-          <!--いいね件数-->
-          <div class = 'row'>
-            <div class = 'col'>
-            <% if photo.favorited_by?(current_user) %>
-              <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
-                 <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
-                 <%= photo.favorites.count %>
-              <% end %>
-            <% else %>
-              <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
-                <i class="fas fa-heart" aria-hidden="true"></i>
-                <%= photo.favorites.count %>
-              <% end %>
+        <%= link_to photo_path(photo) do %>
+          <%= image_tag photo.photo_image, size:"300x200" %>
+        <% end %>
+        <!--いいね件数-->
+        <div class = 'row'>
+          <div class = 'col'>
+          <% if photo.favorited_by?(current_user) %>
+            <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
+               <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+               <%= photo.favorites.count %>
             <% end %>
-            </div>
+          <% else %>
+            <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
+              <i class="fas fa-heart" aria-hidden="true"></i>
+              <%= photo.favorites.count %>
+            <% end %>
+          <% end %>
+          </div>
             <!--コメント件数-->
             <div class = 'col'>
-            <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+              <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
             </div>
-          </div>
-       </div>
+        </div>
+      </div>
     <% end %>
+    </div>
   </div>
