@@ -39,8 +39,12 @@
       </div>
 
       <!--自己紹介文-->
-      <%= @user.introduction %>
-      </div>
+      <% if @user.introduction.present? %>
+        <%= @user.introduction %><br><br>
+      <% else %>
+        <br>
+      <% end %>
+    </div>
 
       <div class ='col-lg-6'>
       <!--マイページなら編集リンクを、他のユーザーならフォローリンクを表示-->
@@ -55,15 +59,15 @@
         </div>
       <% else %>
         <div class='row'>
-          <div class='col-md-5 mx-2'>
+          <div class='col-sm-6'>
             <% if current_user.following?(@user) %>
-              <p><%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete, class:"btn btn-sm btn-success btn-block" %></p>
+              <p><%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete, class:"btn btn-sm btn-success" %></p>
             <% else %>
-              <p><%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class:"btn btn-sm btn-success btn-block" %></p>
+              <p><%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class:"btn btn-sm btn-success" %></p>
             <% end %>
           </div>
-          <div class='col-md-5 mx-2'>
-            <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success btn-block" %></p>
+          <div class='col-md-6'>
+            <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
           </div>
         </div>
       <% end %>
@@ -83,9 +87,9 @@
           </div>
         </div>
       <% end %>
+      <br>
     </div>
   </div>
-  <br>
 
   <!--ユーザーの投稿表示-->
   <div class='row '>
