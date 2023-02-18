@@ -94,32 +94,38 @@
   <!--ユーザーの投稿表示-->
   <div class='row '>
     <div class = 'col'>
-    <% @photos.each do |photo| %>
-      <div class="card shadow-sm" style="width: 330px; float: left; margin: 5px 5px 5px 0; padding: 15px;">
-        <%= link_to photo_path(photo) do %>
-          <%= image_tag photo.photo_image, size:"300x200" %>
-        <% end %>
-        <!--いいね件数-->
-        <div class = 'row'>
-          <div class = 'col'>
-          <% if photo.favorited_by?(current_user) %>
-            <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
-               <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
-               <%= photo.favorites.count %>
-            <% end %>
-          <% else %>
-            <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
-              <i class="fas fa-heart" aria-hidden="true"></i>
-              <%= photo.favorites.count %>
-            <% end %>
+      <% @photos.each do |photo| %>
+        <div class="card shadow-sm" style="width: 330px; float: left; margin: 5px 5px 5px 0; padding: 15px;">
+          <%= link_to photo_path(photo) do %>
+            <%= image_tag photo.photo_image, size:"300x200" %>
           <% end %>
-          </div>
-            <!--コメント件数-->
+          <!--いいね件数-->
+          <div class = 'row'>
             <div class = 'col'>
-              <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+            <% if photo.favorited_by?(current_user) %>
+              <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
+                 <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+                 <%= photo.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
+                <i class="fas fa-heart" aria-hidden="true"></i>
+                <%= photo.favorites.count %>
+              <% end %>
+            <% end %>
             </div>
+              <!--コメント件数-->
+              <div class = 'col'>
+                <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+              </div>
+              <% if photo.prefectures == "未選択" %>
+              <% else %>
+                <div class = 'col'>
+                  <i class="fas fa-map-marker-alt"></i> <%= photo.prefectures %>
+                </div>
+              <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
     </div>
   </div>

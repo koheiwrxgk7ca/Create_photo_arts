@@ -1,5 +1,14 @@
 <h3>投稿編集画面</h3>
 
+<% if @photo.errors.any? %>
+  <%= @photo.errors.count %>件のエラー
+  <ul>
+    <% @photo.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model:@photo, url: photo_path(@photo), local:true do |f| %>
 
 <!--部分テンプレート-->

@@ -51,13 +51,16 @@ class Public::PhotosController < ApplicationController
 
   def update
     @photo = Photo.find(params[:id])
-    @photo.update(photo_params)
-    if params[:photo][:tag_id].present?
-      @photo.tags.destroy_all
-      tag = Tag.find(params[:photo][:tag_id])
-      @photo.tags << tag
+    if @photo.update(photo_params)
+      if params[:photo][:tag_id].present?
+        @photo.tags.destroy_all
+        tag = Tag.find(params[:photo][:tag_id])
+        @photo.tags << tag
+      end
+      redirect_to photo_path(@photo)
+    else
+      render :edit
     end
-    redirect_to photo_path(@photo)
   end
 
   def destroy

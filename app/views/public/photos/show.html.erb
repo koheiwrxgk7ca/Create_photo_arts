@@ -1,8 +1,8 @@
   <div class='row'>
-    <div class='col-4'>
+    <div class='col-sm-10'>
       <h3>投稿詳細</h3>
     </div>
-    <div class='col-2'>
+    <div class='col-md-1'>
       <!--新規投稿画面アイコン-->
       <%= link_to new_photo_path do %>
         <h4><i class="fas fa-plus-circle"></i></h4>
@@ -12,63 +12,169 @@
 
   <!--ユーザー詳細画面へのリンク-->
   <p>投稿者
-   <%= link_to(@photo.user) do %>
-    <%= @photo.user.name %>
-   <% end %>
+    <%= link_to(@photo.user) do %>
+      <%= @photo.user.name %>
+    <% end %>
   </p>
 
   <div class='row'>
-   <!--写真の表示-->
-   <div class='col-7'>
-    <%= image_tag @photo.photo_image, size:"600x400" %>
-   </div>
+    <!--写真の表示-->
+    <div class='col-6'>
+      <%= image_tag @photo.photo_image, size:"510x340" %>
+    </div>
 
-   <!--情報の表示-->
-   <div class='col-xl-4'>
-    カメラ             <%= @photo.camera_name %><br>
-    焦点距離           <%= @photo.focal_length %>mm<br>
-    F値                <%= @photo.focal_number %><br>
-    シャッタースピード <%= @photo.shutter_speed %>s<br>
-    ISO感度            <%= @photo.iso %><br>
-    アクセサリー       <%= @photo.accessory %><br>
-    編集               <% if @photo.edit_pictuer == false %>
-                        なし
-                       <% else %>
-                        あり
-                       <% end %><br>
-    <!--県の表示-->
-    <%= @photo.prefectures %><br>
-    <!--撮影場所の表示-->
-    <%= @photo.region %><br>
-    <!--コメントの表示-->
-    <%= @photo.opinion %><br>
-    <!--タグの表示-->
-    <% @photo.tag_relations.each do |tag_relation| %>
-     <%= tag_relation.tag.tag_name %>
-    <% end %>
+    <!--情報の表示-->
+    <div class='col-xl-6'>
+      <table>
+        <!--情報の入力の有無による分岐-->
+        <% if @photo.camera_name.present? %>
+        <tr>
+          <td style = "white-space: nowrap";>
+            カメラ
+          </td>
+          <td style = "padding-left: 10px";>
+            <%= @photo.camera_name %>
+          </td>
+        </tr>
+        <% else %>
+        <% end %>
 
-    <!--自分の投稿の場合編集と削除リンクを表示する-->
-    <% if @photo.user == current_user %>
-     <br><br>
-     <%= link_to "Edit", edit_photo_path(@photo.id), class:"btn btn-sm btn-success" %>
-     |
-     <%= link_to "Destroy", photo_path(@photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
-    <% end %><br>
+        <tr>
+          <td style = "white-space: nowrap";>
+            焦点距離
+          </td>
+          <td style = "padding-left: 10px";>
+            <%= @photo.focal_length %>mm
+          </td>
+        </tr>
 
-    <!--いいね機能及び、コメント数表示-->
-    <% if @photo.favorited_by?(current_user) %>
-      <%= link_to photo_favorites_path(@photo.id), method: :delete, remote: true do %>
-       <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
-       <%= @photo.favorites.count %> 件
+        <tr>
+          <td style = "white-space: nowrap";>
+            F値
+          </td>
+          <td style = "padding-left: 10px";>
+            <%= @photo.focal_number %>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td style = "white-space: nowrap";>
+            SS
+          </td>
+          <td style = "padding-left: 10px";>
+            <%= @photo.shutter_speed %>s
+          </td>
+        </tr>
+
+        <tr>
+          <td style = "white-space: nowrap";>
+            ISO感度
+          </td>
+          <td style = "padding-left: 10px";>
+            <%= @photo.iso %>
+          </td>
+        </tr>
+
+        <tr>
+          <td style = "white-space: nowrap";>
+            周辺機器
+          </td>
+          <td style = "padding-left: 10px";>
+            <%= @photo.accessory %>
+          </td>
+        </tr>
+
+        <tr>
+          <td style = "white-space: nowrap";>
+            編集
+          </td>
+          <td style = "padding-left: 10px";>
+            <% if @photo.edit_pictuer == false %>
+              なし
+            <% else %>
+              あり
+            <% end %>
+          </td>
+        </tr>
+
+        <!--県の表示-->
+        <% if @photo.prefectures == "未選択" %>
+        <% else %>
+          <tr>
+            <td style = "white-space: nowrap";>
+              都道府県
+            </td>
+            <td style = "padding-left: 10px";>
+              <%= @photo.prefectures %>
+            </td>
+          </tr>
+        <% end %>
+
+        <!--撮影場所の表示-->
+        <% if @photo.region.present? %>
+          <tr>
+            <td style = "white-space: nowrap";>
+              撮影場所
+            </td>
+            <td style = "padding-left: 10px";>
+              <%= @photo.region %>
+            </td>
+          </tr>
+        <% else %>
+        <% end %>
+
+        <!--コメントの表示-->
+        <% if @photo.opinion.present? %>
+          <tr>
+            <td style = "white-space: nowrap";>
+              Text
+            </td>
+            <td style = "padding-left: 10px";>
+              <%= @photo.opinion %>
+            </td>
+          </tr>
+        <% else %>
+        <% end %>
+
+        <!--タグの表示-->
+        <% @photo.tag_relations.each do |tag_relation| %>
+          <% if tag_relation.tag.tag_name.present? %>
+            <tr>
+              <td style = "white-space: nowrap";>
+                タグ
+              </td>
+              <td style = "padding-left: 10px";>
+                <%= tag_relation.tag.tag_name %>
+              </td>
+            </tr>
+          <% else %>
+          <% end %>
+        <% end %>
+      </table>
+
+      <!--自分の投稿の場合編集と削除リンクを表示する-->
+      <% if @photo.user == current_user %>
+        <br>
+        <%= link_to "Edit", edit_photo_path(@photo.id), class:"btn btn-sm btn-success" %>
+        |
+        <%= link_to "Destroy", photo_path(@photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
+      <% end %><br>
+
+      <!--いいね機能及び、コメント数表示-->
+      <% if @photo.favorited_by?(current_user) %>
+        <%= link_to photo_favorites_path(@photo.id), method: :delete, remote: true do %>
+          <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+          <%= @photo.favorites.count %> 件
+        <% end %>
+      <% else %>
+        <%= link_to photo_favorites_path(@photo.id), method: :post, remote: true  do %>
+          <i class="fas fa-heart" aria-hidden="true"></i>
+          <%= @photo.favorites.count %> 件
+        <% end %>
       <% end %>
-    <% else %>
-      <%= link_to photo_favorites_path(@photo.id), method: :post, remote: true  do %>
-        <i class="fas fa-heart" aria-hidden="true"></i>
-        <%= @photo.favorites.count %> 件
-      <% end %>
-    <% end %>
-    コメント数：<%= @photo.comments.count %>
-   </div>
+      コメント数：<%= @photo.comments.count %>
+    </div>
   </div>
 
 　<!--コメントの表示及び、削除-->
@@ -107,9 +213,9 @@
 
   <!--コメント投稿フォーム-->
   <div class="form-group">
-   <label for="newcomment">Comment</label>
-   <%= form_with(model:[@photo_comment, @comment], url: photo_comments_path(@photo), local: true) do |f| %>
-     <%= f.text_area :photo_comment, rows:'5',placeholder: "コメントをここに",class:"form-control" %>
-     <%= f.submit "送信する" %>
-   <% end %>
+    <label for="newcomment">Comment</label>
+    <%= form_with(model:[@photo_comment, @comment], url: photo_comments_path(@photo), local: true) do |f| %>
+      <%= f.text_area :photo_comment, rows:'5',placeholder: "コメントをここに",class:"form-control" %>
+      <%= f.submit "送信する" %>
+    <% end %>
   </div>
