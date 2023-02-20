@@ -21,14 +21,14 @@ class Public::PhotosController < ApplicationController
   def index
     if params[:prefecture].present?&&params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @photos = @tag.photos.where(prefectures: params[:prefecture]).order(created_at: :desc)
+      @photos = @tag.photos.where(prefectures: params[:prefecture]).order(created_at: :desc).page(params[:page]).per(9)
     elsif params[:prefecture].present?
-      @photos = Photo.where(prefectures: params[:prefecture]).order(created_at: :desc)
+      @photos = Photo.where(prefectures: params[:prefecture]).order(created_at: :desc).page(params[:page]).per(9)
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @photos = @tag.photos.order(created_at: :desc)
+      @photos = @tag.photos.order(created_at: :desc).page(params[:page]).per(9)
     else
-      @photos = Photo.all.order(created_at: :desc)
+      @photos = Photo.all.order(created_at: :desc).page(params[:page]).per(9)
     end
     # 都道府県検索
     @prefectures = Photo.prefectures

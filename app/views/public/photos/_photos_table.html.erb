@@ -29,17 +29,9 @@
           <!--いいね件数-->
           <div class = 'row'>
             <div class = 'col'>
-              <% if photo.favorited_by?(current_user) %>
-                <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
-                   <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
-                   <%= photo.favorites.count %>
-                <% end %>
-              <% else %>
-                <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
-                  <i class="fas fa-heart" aria-hidden="true"></i>
-                  <%= photo.favorites.count %>
-                <% end %>
-              <% end %>
+              <div id="favorite_buttons_<%= photo.id %>">
+                <%= render 'public/favorites/favorites', photo: photo %>
+              </div>
             </div>
 
             <!--コメント件数-->
@@ -57,5 +49,11 @@
           </div>
         </div>
       <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= paginate photos %>
     </div>
   </div>

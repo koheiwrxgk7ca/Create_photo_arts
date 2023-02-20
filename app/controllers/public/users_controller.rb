@@ -1,16 +1,16 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   def index
-    @users = User.all
+    @users = User.all.page(params[:page]).per(10)
     @q = User.ransack(params[:q])
-    @users = @q.result
+    @users = @q.result.page(params[:page]).per(10)
   end
 
   def show
     @user = User.includes(:photos).find(params[:id])
-    @photos = @user.photos.includes(:tags).order(created_at: :desc)
-    @photos = @photos.where(prefectures: params[:prefecture]).order(created_at: :desc) if params[:prefecture].present?
-    @photos = @photos.where(tags: {id: params[:tag_id]}).order(created_at: :desc) if params[:tag_id].present?
+    @photos = @user.photos.includes(:tags).order(created_at: :desc).page(params[:page]).per(9)
+    @photos = @photos.where(prefectures: params[:prefecture]).order(created_at: :desc).page(params[:page]).per(9) if params[:prefecture].present?
+    @photos = @photos.where(tags: {id: params[:tag_id]}).order(created_at: :desc).page(params[:page]).per(9) if params[:tag_id].present?
     @prefectures = Photo.prefectures
   end
 
@@ -37,7 +37,7 @@ class Public::UsersController < ApplicationController
       @tag = Tag.find(params[:tag_id])
       @favorite_photos = @tag.photos.where(prefectures: params[:prefecture]).where(id: favorite_photo_ids).order(created_at: :desc)
     elsif params[:prefecture].present?
-      @favorite_photos = Photo.where(id: favorite_photo_ids).where(prefectures: params[:prefecture]).order(created_at: :desc)
+      @favorite_photos = Photo.where(id: favorite_photo_ids).where(prefectures: params[:prefecture])
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
       @favorite_photos = @tag.photos.where(id: favorite_photo_ids).order(created_at: :desc)
