@@ -8,9 +8,9 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.includes(:photos).find(params[:id])
-    @photos = @user.photos.includes(:tags)
-    @photos = @photos.where(prefectures: params[:prefecture]) if params[:prefecture].present?
-    @photos = @photos.where(tags: {id: params[:tag_id]}) if params[:tag_id].present?
+    @photos = @user.photos.includes(:tags).order(created_at: :desc)
+    @photos = @photos.where(prefectures: params[:prefecture]).order(created_at: :desc) if params[:prefecture].present?
+    @photos = @photos.where(tags: {id: params[:tag_id]}).order(created_at: :desc) if params[:tag_id].present?
     @prefectures = Photo.prefectures
   end
 

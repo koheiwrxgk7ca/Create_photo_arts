@@ -26,7 +26,7 @@
 ## 設計書
 - WBSシート
    https://docs.google.com/spreadsheets/d/1sFRlq2r8iIIIV4p7H9y0jcG-W3EP91u1-Jt-9dmoWRA/edit#gid=1773513600
-- フロチャート、ワイヤーフレーム、ER図
+- フロチャート、ER図
    https://app.diagrams.net/#W81ff886c8aeba6f7%2F81FF886C8AEBA6F7!221
 - テーブル定義書、アプリケーション詳細設計書
    https://docs.google.com/spreadsheets/d/10LkDwoIBsW64pIsu8Xw8rfGlpdKewiI674StUWuuo-I/edit#gid=1071442547

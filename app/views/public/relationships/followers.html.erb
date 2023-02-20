@@ -1,13 +1,14 @@
   <div class='row'>
-    <div class='col-6'>
+    <div class='col-8'>
       <h3>Followers <%= @user.name %></h3>
     </div>
-    <div class='col-4'>
-      <%=link_to"Followings list",user_followings_path, class:"btn btn-sm btn-success" %>
+    <div class='col-md-3'>
+      <%=link_to"Followings",user_followings_path, class:"btn btn-sm btn-success" %>
     </div>
-  </div>
+  </div><br>
 
   <!--ユーザー検索-->
+  <%= render 'public/users/sarch_users', q: @q, path: :user_followers_path %>
   <%= search_form_for @q, url: user_followers_path do |f| %>
    <%= f.search_field :name_cont, placeholder: 'ユーザー検索' %>
    <%= f.submit %>
