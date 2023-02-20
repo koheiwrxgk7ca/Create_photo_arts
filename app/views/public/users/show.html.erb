@@ -8,12 +8,8 @@
       <% end %>
     </div>
 
-    <div class='col-md-1'>
-      <!--新規投稿画面アイコン-->
-      <%= link_to new_photo_path do %>
-        <h3><i class="fas fa-plus-circle"></i></h3>
-      <% end %>
-    </div>
+    <!--新規投稿画面アイコン-->
+    <%= render 'public/photos/new_post_btn' %>
   </div><br>
 
   <div class='row align-items-end'>
@@ -48,85 +44,35 @@
 
     <div class ='col-lg-6'>
     <!--マイページなら編集リンクを、他のユーザーならフォローリンクを表示-->
-    <% if @user == current_user %>
-      <div class='row'>
-        <div class='col-sm-6'>
-          <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-success" %></p>
+      <% if @user == current_user %>
+        <div class='row'>
+          <div class='col-sm-6'>
+            <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-success" %></p>
+          </div>
+          <div class='col-md-6'>
+            <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
+          </div>
         </div>
-        <div class='col-md-6'>
-          <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
+      <% else %>
+        <div class='row'>
+          <div class='col-sm-6'>
+            <% if current_user.following?(@user) %>
+              <p><%= link_to "フォローを外す", user_relationships_path(@user.id), method: :delete, class:"btn btn-sm btn-success" %></p>
+            <% else %>
+              <p><%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class:"btn btn-sm btn-success" %></p>
+            <% end %>
+          </div>
+          <div class='col-md-6'>
+            <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
+          </div>
         </div>
-      </div>
-    <% else %>
-      <div class='row'>
-        <div class='col-sm-6'>
-          <% if current_user.following?(@user) %>
-            <p><%= link_to "フォローを外す", user_relationships_path(@user.id), method: :delete, class:"btn btn-sm btn-success" %></p>
-          <% else %>
-            <p><%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class:"btn btn-sm btn-success" %></p>
-          <% end %>
-        </div>
-        <div class='col-md-6'>
-          <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
 
-    <p>投稿一覧</p>
-    <!--検索フォーム-->
-    <%= form_with url: user_path(@user), method: :get, local: true do |f| %>
-      <!--部分テンプレート-->
-      <div class="form-row">
-        <div class="col">
-          <%= f.select :prefecture, @prefectures, { include_blank: "都道府県検索", selected: params[:prefecture] }, { class: "form-control" } %>
-        </div>
-        <div class="col">
-          <%= f.collection_select :tag_id, Tag.all, :id, :tag_name, { include_blank: "タグ検索", selected: params[:tag_id] }, { class: "form-control" } %>
-        </div>
-        <div class="col">
-          <%= f.submit "検索する", class: "btn btn-primary" %>
-        </div>
-      </div>
-    <% end %><br>
-    <!--ここまで-->
+      <p>投稿一覧</p>
+      <!--投稿検索フォーム-->
+      <%= render 'public/photos/sarch_photos', prefectures: @prefectures, path: user_path(@user) %>
     </div>
   </div>
 
   <!--ユーザーの投稿表示-->
-  <div class='row '>
-    <div class = 'col'>
-      <% @photos.each do |photo| %>
-        <div class="card shadow-sm" style="width: 330px; float: left; margin: 5px 5px 5px 0; padding: 15px;">
-          <%= link_to photo_path(photo) do %>
-            <%= image_tag photo.photo_image, size:"300x200" %>
-          <% end %>
-          <!--いいね件数-->
-          <div class = 'row'>
-            <div class = 'col'>
-            <% if photo.favorited_by?(current_user) %>
-              <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
-                 <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
-                 <%= photo.favorites.count %>
-              <% end %>
-            <% else %>
-              <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
-                <i class="fas fa-heart" aria-hidden="true"></i>
-                <%= photo.favorites.count %>
-              <% end %>
-            <% end %>
-            </div>
-              <!--コメント件数-->
-              <div class = 'col'>
-                <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
-              </div>
-              <% if photo.prefectures == "未選択" %>
-              <% else %>
-                <div class = 'col'>
-                  <i class="fas fa-map-marker-alt"></i> <%= photo.prefectures %>
-                </div>
-              <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'public/photos/photos_table', photos: @photos %>

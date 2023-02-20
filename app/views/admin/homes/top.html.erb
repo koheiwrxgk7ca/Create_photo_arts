@@ -1,13 +1,7 @@
   <h3>ユーザー一覧画面</h3>
-
+  
   <!--ユーザー検索-->
-  <!--部分テンプレート-->
-  <%= render 'public/users/sarch_users', q: @q, path: :admin_top_path %>
-  <%= search_form_for @q, url: admin_top_path do |f| %>
-   <%= f.search_field :name_cont, placeholder: 'ユーザー検索' %>
-   <%= f.submit %>
-  <% end %>
-  <!--ここまで-->
+  <%= render 'public/users/sarch_users', q: @q, path: admin_top_path %>
 
   <table class = "table">
     <% @users.each do |user| %>

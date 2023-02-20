@@ -1,0 +1,61 @@
+  <div class='row '>
+    <div class = 'col'>
+      <% photos.each do |photo| %>
+        <div class="card shadow-sm" style="width: 330px; float: left; margin: 5px 5px 5px 0; padding: 15px;">
+
+          <!--ユーザーページ以外なら表示-->
+          <div class='row '>
+            <div class = 'col'>
+              <% if current_page?(photo.user) %>
+              <% else %>
+                <p>投稿者
+                  <%= link_to(photo.user) do %>
+                   <%= photo.user.name %>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+
+          <!--写真リンク表示-->
+          <div class='row '>
+            <div class = 'col'>
+              <%= link_to photo_path(photo) do %>
+                <%= image_tag photo.photo_image, size:"300x200" %>
+              <% end %>
+            </div>
+          </div>
+
+          <!--いいね件数-->
+          <div class = 'row'>
+            <div class = 'col'>
+              <% if photo.favorited_by?(current_user) %>
+                <%= link_to photo_favorites_path(photo), method: :delete, remote: true do %>
+                   <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+                   <%= photo.favorites.count %>
+                <% end %>
+              <% else %>
+                <%= link_to photo_favorites_path(photo), method: :post, remote: true  do %>
+                  <i class="fas fa-heart" aria-hidden="true"></i>
+                  <%= photo.favorites.count %>
+                <% end %>
+              <% end %>
+            </div>
+
+            <!--コメント件数-->
+            <div class = 'col'>
+              <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+            </div>
+
+            <!--未選択は表示させない-->
+            <% if photo.prefectures == "未選択" %>
+            <% else %>
+              <div class = 'col'>
+                <i class="fas fa-map-marker-alt"></i> <%= photo.prefectures %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>

@@ -31,18 +31,18 @@ class Public::UsersController < ApplicationController
 
   def favorites
     @user = User.find(params[:id])
-    favorites = Favorite.where(user_id: @user.id).pluck(:photo_id)
+    favorite_photo_ids = @user.favorites.pluck(:photo_id)
     # 検索結果表示のための記述
     if params[:prefecture].present?&&params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @favorite_photos = @tag.photos.where(prefectures: params[:prefecture])
+      @favorite_photos = @tag.photos.where(prefectures: params[:prefecture]).where(id: favorite_photo_ids).order(created_at: :desc)
     elsif params[:prefecture].present?
-      @favorite_photos = Photo.where(prefectures: params[:prefecture])
+      @favorite_photos = Photo.where(id: favorite_photo_ids).where(prefectures: params[:prefecture]).order(created_at: :desc)
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @favorite_photos = @tag.photos
+      @favorite_photos = @tag.photos.where(id: favorite_photo_ids).order(created_at: :desc)
     else
-      @favorite_photos = Photo.find(favorites)
+      @favorite_photos = Photo.find(favorite_photo_ids.reverse)
     end
     @prefectures = Photo.prefectures
   end
