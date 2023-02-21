@@ -1,0 +1,23 @@
+  <div id="comments-area">
+    <table>
+      <% photo.comments.each do |comment| %>
+        <tr>
+          <td>
+            <%= image_tag comment.user.get_profile_image, size: '50x50' %><br>
+            <%=link_to user_path(comment.user.id) do %>
+              <%= comment.user.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= comment.photo_comment %>
+          </td>
+          <% if comment.user == current_user %>
+          <td>
+            <%= link_to "削除", photo_comment_path(comment.photo, comment), method: :delete, remote: true %>
+          </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+

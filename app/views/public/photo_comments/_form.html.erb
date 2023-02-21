@@ -1,0 +1,18 @@
+  <!--コメントのエラーメッセージ表示-->
+  <% if comment.errors.any? %>
+  <%= comment.errors.count %>件のエラー
+  <ul>
+    <% comment.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <!--コメント投稿フォーム-->
+  <div class="form-group">
+    <label for="newcomment">Comment</label>
+    <%= form_with(model:[photo_comment, comment], url: photo_comments_path(@photo)) do |f| %>
+      <%= f.text_area :photo_comment, rows:'5',placeholder: "コメントをここに",class:"form-control" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+  </div>

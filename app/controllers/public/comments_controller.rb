@@ -5,7 +5,7 @@ class Public::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.photo_id = @photo.id
     if @comment.save
-      redirect_to @photo
+      render :comments
     else
       @photo_comment = Photo.new
       render "public/photos/show"
@@ -14,7 +14,8 @@ class Public::CommentsController < ApplicationController
 
   def destroy
     Comment.find_by(id: params[:id], photo_id: params[:photo_id]).destroy
-    redirect_to request.referer
+    @photo = Photo.find(params[:photo_id])
+    render :comments
   end
 
 

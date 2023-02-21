@@ -168,44 +168,11 @@
   </div>
 
 　<!--コメントの表示及び、削除-->
-  <div id="comments-area">
-    <table>
-      <% @photo.comments.each do |comment| %>
-        <tr>
-          <td>
-            <%= image_tag comment.user.get_profile_image, size: '50x50' %><br>
-            <%=link_to user_path(comment.user.id) do %>
-              <%= comment.user.name %>
-            <% end %>
-          </td>
-          <td>
-            <%= comment.photo_comment %>
-          </td>
-          <% if comment.user == current_user %>
-          <td>
-            <%= link_to "削除", photo_comment_path(comment.photo, comment), method: :delete,remote: true %>
-          </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
+　<div id="comments_area">
+    <%= render 'public/photo_comments/comments', photo: @photo %>
   </div>
 
-  <!--コメントのエラーメッセージ表示-->
-  <% if @comment.errors.any? %>
-  <%= @comment.errors.count %>件のエラー
-  <ul>
-    <% @comment.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-  <% end %>
-
-  <!--コメント投稿フォーム-->
-  <div class="form-group">
-    <label for="newcomment">Comment</label>
-    <%= form_with(model:[@photo_comment, @comment], url: photo_comments_path(@photo), local: true) do |f| %>
-      <%= f.text_area :photo_comment, rows:'5',placeholder: "コメントをここに",class:"form-control" %>
-      <%= f.submit "送信する" %>
-    <% end %>
+  <!--エラーと投稿入力フォーム-->
+  <div class="new-comment">
+    <%= render 'public/photo_comments/form', comment: @comment, photo_comment: @photo_comment %>
   </div>
