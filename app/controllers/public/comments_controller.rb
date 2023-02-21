@@ -7,14 +7,13 @@ class Public::CommentsController < ApplicationController
     if @comment.save
     else
       @photo_comment = Photo.new
-      render "public/photos/show"
+
     end
   end
 
   def destroy
     Comment.find_by(id: params[:id], photo_id: params[:photo_id]).destroy
     @photo = Photo.find(params[:photo_id])
-
   end
 
 

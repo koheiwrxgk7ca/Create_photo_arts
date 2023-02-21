@@ -78,6 +78,6 @@ class Public::PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:tag_id, :tag_relation_id, :user_id, :camera_name, :focal_length, :focal_number, :shutter_speed, :iso, :accessory, :edit_pictuer, :opinion, :prefectures, :region, :photo_image)
+    params.require(:photo).permit(:tag_id, :tag_relation_id, :user_id, :camera_name, :focal_length, :focal_number, :shutter_speed, :iso, :accessory, :edit_pictuer, :opinion, :prefectures, :region, :photo_image, tag_ids: [])
   end
 end

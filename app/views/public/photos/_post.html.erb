@@ -80,12 +80,16 @@
       </div>
 
       <div class = "col-lg-2">
-        <%= f.label :edit_pictuer, "編集" %><br>
+        <% if current_page?(new_photo_path) %>
+          <%= f.label :edit_pictuer, "※編集" %><br>
+        <% else %>
+          <%= f.label :edit_pictuer, "編集" %><br>
+        <% end %>
         <%= f.select :edit_pictuer, [['なし',0],['あり',1]], { include_blank: true, selected: 0 } %>
       </div>
     </div>
 
-  　<div class = "row">
+    <div class = "row">
       <div class = "col-lg-2">
         <%= f.label :prefectures, "都道府県" %><br>
         <%= f.select :prefectures, Photo.prefectures.keys, {} %>
@@ -96,11 +100,20 @@
         <%= f.text_field :region, placeholder: "～付近" %>
       </div>
 
-       <div class = "col-lg-2">
-        <%= f.label :tag_id,"タグ" %><br>
-        <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :tag_name), { include_blank: "タグ選択"} %>
+      <div class = "col-lg-8">
+        <div class='form-group'>
+          <%= f.label :tag_id,"タグ" %><br>
+          <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
+            <div class='form-check'>
+              <%= tag.label class: 'form-check-label' do %>
+                <%= tag.check_box class: 'form-check-input' %>
+                <%= tag.text %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div><br>
+    </div>
 
     <%= f.text_area :opinion, class:"form-control", rows:"3", placeholder: "Text 100文字以内" %><br>
 

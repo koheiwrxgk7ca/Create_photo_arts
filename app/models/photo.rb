@@ -26,6 +26,7 @@ class Photo < ApplicationRecord
   validates :shutter_speed, presence: true
   validates :iso, presence: true
   validates :accessory, presence: true
+  validates :edit_pictuer, inclusion: {in: [true, false]}
   validates :opinion, length: { maximum: 100 }
 
   def favorited_by?(user)

@@ -1,12 +1,7 @@
   <!--コメントのエラーメッセージ表示-->
-  <% if comment.errors.any? %>
-  <%= comment.errors.count %>件のエラー
-  <ul>
-    <% comment.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-  <% end %>
+  <div id="error">
+    <%= render 'public/photo_comments/error', comment: comment %>
+  </div>
 
   <!--コメント投稿フォーム-->
   <div class="form-group">
