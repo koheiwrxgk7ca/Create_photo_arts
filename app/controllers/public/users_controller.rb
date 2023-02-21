@@ -35,14 +35,14 @@ class Public::UsersController < ApplicationController
     # 検索結果表示のための記述
     if params[:prefecture].present?&&params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @favorite_photos = @tag.photos.where(prefectures: params[:prefecture]).where(id: favorite_photo_ids).order(created_at: :desc)
+      @favorite_photos = @tag.photos.where(prefectures: params[:prefecture]).where(id: favorite_photo_ids).order(created_at: :desc).page(params[:page]).per(9)
     elsif params[:prefecture].present?
-      @favorite_photos = Photo.where(id: favorite_photo_ids).where(prefectures: params[:prefecture])
+      @favorite_photos = Photo.where(id: favorite_photo_ids).where(prefectures: params[:prefecture]).page(params[:page]).per(9)
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @favorite_photos = @tag.photos.where(id: favorite_photo_ids).order(created_at: :desc)
+      @favorite_photos = @tag.photos.where(id: favorite_photo_ids).order(created_at: :desc).page(params[:page]).per(9)
     else
-      @favorite_photos = Photo.find(favorite_photo_ids.reverse)
+      @favorite_photos = Photo.where(id: favorite_photo_ids).order(created_at: :desc).page(params[:page]).per(9)
     end
     @prefectures = Photo.prefectures
   end

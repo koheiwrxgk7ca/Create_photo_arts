@@ -158,12 +158,17 @@
         <%= link_to "Destroy", photo_path(@photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
       <% end %><br>
 
-      <!--いいね機能-->
-      <p id="favorite_buttons_<%= @photo.id %>">
-        <%= render 'public/favorites/favorites', photo: @photo %>
-        <!--コメント数表示-->
-        コメント数：<%= @photo.comments.count %>
-      </p>
+        <!--いいね機能-->
+      <div class = 'row'>
+        <div class = 'col-2'>
+          <p id="favorite_buttons_<%= @photo.id %>">
+            <%= render 'public/favorites/favorites', photo: @photo %>
+          </p>
+        </div>
+        <div class = 'col-1'>
+          件
+        </div>
+      </div>
     </div>
   </div>
 

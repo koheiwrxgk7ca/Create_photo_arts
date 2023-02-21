@@ -11,7 +11,7 @@
   <!--コメント投稿フォーム-->
   <div class="form-group">
     <label for="newcomment">Comment</label>
-    <%= form_with(model:[photo_comment, comment], url: photo_comments_path(@photo)) do |f| %>
+    <%= form_with(model:[photo_comment, comment], url: photo_comments_path(@photo), local: false) do |f| %>
       <%= f.text_area :photo_comment, rows:'5',placeholder: "コメントをここに",class:"form-control" %>
       <%= f.submit "送信する" %>
     <% end %>
