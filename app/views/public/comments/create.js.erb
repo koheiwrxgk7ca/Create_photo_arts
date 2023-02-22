@@ -1,3 +1,4 @@
 $("#comments_area").html("<%= j(render 'public/photo_comments/comments', photo: @photo) %>");
 <!--フォームの送信後値を空にする-->
+$("#error").html("<%= j(render 'public/photo_comments/error', comment: @comment) %>");
 $("textarea").val('');

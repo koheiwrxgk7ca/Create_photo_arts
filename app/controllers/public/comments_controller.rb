@@ -4,11 +4,7 @@ class Public::CommentsController < ApplicationController
     @photo = Photo.find(params[:photo_id])
     @comment = current_user.comments.new(comment_params)
     @comment.photo_id = @photo.id
-    if @comment.save
-    else
-      @photo_comment = Photo.new
-
-    end
+    @comment.save
   end
 
   def destroy
