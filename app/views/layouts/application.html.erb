@@ -33,41 +33,63 @@
 
         <% if user_signed_in? %>
             <li style="margin: 10px;">
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                <i class="fas fa-sign-out-alt"></i> Log out
+              <% end %>
             </li>
             <li style="margin: 10px;">
-              <%= link_to "Photos", photos_path, class: 'nav-link text-dark' %>
+              <%= link_to photos_path, class: 'nav-link text-dark' do %>
+                <i class="fas fa-photo-video"></i> Photos
+              <% end %>
             </li>
             <li style="margin: 10px;">
-              <%= link_to "Users", users_path, class: 'nav-link text-dark' %>
+              <%= link_to users_path, class: 'nav-link text-dark' do %>
+                <i class="fas fa-users"></i> Users
+              <% end %>
             </li>
             <li style="margin: 10px;">
-              <%= link_to "Home", current_user, class: 'nav-link text-dark' %>
+              <%= link_to current_user, class: 'nav-link text-dark' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
             </li>
 
         <% elsif admin_signed_in? %>
             <li style="margin: 10px;">
-              <%= link_to "Log out", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                <i class="fas fa-sign-out-alt"></i> Log out
+              <% end %>
             </li>
             <li style="margin: 10px;">
-              <%= link_to "Member", admin_top_path, class: 'nav-link text-dark' %>
+              <%= link_to admin_top_path, class: 'nav-link text-dark' do %>
+                <i class="fas fa-users-cog"></i> Member
+              <% end %>
             </li>
             <li style="margin: 10px;">
-              <%= link_to "Tag", admin_tags_path, class: 'nav-link text-dark' %>
+              <%= link_to admin_tags_path, class: 'nav-link text-dark' do %>
+                <i class="fas fa-hashtag"></i> Tag
+              <% end %>
             </li>
 
         <% else %>
             <li style="margin: 10px;">
-              <%=  link_to "Log in", user_session_path, class: 'nav-link text-dark' %>
+              <%=  link_to user_session_path, class: 'nav-link text-dark' do %>
+                <i class="fas fa-sign-in-alt"></i> Log in
+              <% end %>
             </li>
             <li style="margin: 10px;">
-              <%= link_to "Sign up", new_user_registration_path, class: 'nav-link text-dark' %>
+              <%= link_to new_user_registration_path, class: 'nav-link text-dark' do %>
+                <i class="fas fa-user-plus"></i> Sign up
+              <% end %>
             </li>
             <li style="margin: 10px;">
-              <%= link_to "About", about_path, class: 'nav-link text-dark' %>
+              <%= link_to about_path, class: 'nav-link text-dark' do %>
+                <i class="fas fa-book-open"></i> About
+              <% end %>
             </li>
             <li style="margin: 10px;">
-              <%= link_to "Home", root_path, class: 'nav-link text-dark' %>
+              <%= link_to root_path, class: 'nav-link text-dark' do %>
+                <i class="fas fa-desktop"></i> Home
+              <% end %>
             </li>
         <% end %>
       </div>
