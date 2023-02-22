@@ -54,7 +54,6 @@
           </td>
         </tr>
 
-
         <tr>
           <td style = "white-space: nowrap";>
             SS
@@ -135,18 +134,18 @@
         <% end %>
 
         <!--タグの表示-->
-        <% @photo.tag_relations.each do |tag_relation| %>
-          <% if tag_relation.tag.tag_name.present? %>
-            <tr>
-              <td style = "white-space: nowrap";>
-                タグ
-              </td>
-              <td style = "padding-left: 10px";>
-                <%= tag_relation.tag.tag_name %>
-              </td>
-            </tr>
-          <% else %>
-          <% end %>
+        <% if @photo.tag_relations.present? %>
+          <tr>
+            <td style = "white-space: nowrap";>
+              タグ
+            </td>
+            <td style = "padding-left: 10px";,"white-space: nowrap";>
+              <% @photo.tag_relations.each do |tag_relation| %>
+                #<%= tag_relation.tag.tag_name %>
+              <% end %>
+            </td>
+          </tr>
+        <% else %>
         <% end %>
       </table>
 
@@ -159,7 +158,7 @@
       <% end %><br>
 
       <!--いいね機能-->
-      <p id="favorite_buttons_<%= @photo.id %>">
+      <p id = "favorite_buttons_<%= @photo.id %>">
         <%= render 'public/favorites/favorites', photo: @photo %>
       </p>
     </div>

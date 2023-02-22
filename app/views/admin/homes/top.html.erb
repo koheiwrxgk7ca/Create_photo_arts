@@ -4,35 +4,32 @@
   <!--ユーザー検索-->
   <%= render 'public/users/sarch_users', q: @q, path: admin_top_path %>
 
-  <table class = "table">
-    <% @users.each do |user| %>
-    <tr>
-      <td>
-        ID <%= user.id %>
-      </td>
-      <td>
-        <%= link_to admin_user_path(user) do %>
-          <%= user.name %>
-        <% end %>
-      </td>
-      <td>
-        <%= user.email %>
-      </td>
-      <td>
-        <% if user.is_deleted == false %>
-         <p class = text-success>有効</p>
-        <% else %>
-         <p class = text-danger>退会</p>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
-
-
-  <div class="row">
-    <div class="col">
-      <%= paginate @users %>
-    </div>
+    <table class = "table">
+      <% @users.each do |user| %>
+      <tr>
+        <td>
+          ID <%= user.id %>
+        </td>
+        <td>
+          <%= link_to admin_user_path(user) do %>
+            <%= user.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <% if user.is_deleted == false %>
+           <p class = text-success>有効</p>
+          <% else %>
+           <p class = text-danger>退会</p>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
   </div>
-</div>
+
+  <div class = "d-flex justify-content-center">
+      <%= paginate @users %>
+  </div>

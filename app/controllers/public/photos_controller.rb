@@ -1,5 +1,5 @@
 class Public::PhotosController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:destroy]
   def new
     @photo = Photo.new
   end
@@ -64,13 +64,17 @@ class Public::PhotosController < ApplicationController
   end
 
   def destroy
-    @photo = Photo.find(params[:id])
-    @photo.destroy
-    # 管理者側から削除した際の遷移先指定
-    if admin_signed_in?
+    # 削除した際の遷移先指定
+    if user_signed_in?
+     @photo = Photo.find(params[:id])
+     @photo.destroy
+     redirect_to current_user
+    elsif admin_signed_in?
+     @photo = Photo.find(params[:id])
+     @photo.destroy
      redirect_to request.referer
     else
-     redirect_to current_user
+     redirect_to root_path
     end
   end
 

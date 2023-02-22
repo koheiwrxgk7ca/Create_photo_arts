@@ -118,7 +118,11 @@
     <%= f.text_area :opinion, class:"form-control", rows:"3", placeholder: "Text 100文字以内" %><br>
 
     <div class="form-group">
-      <%= f.submit "新規投稿", class: 'btn btn-success btn-block' %>
+      <% if current_page?(new_photo_path) %>
+        <%= f.submit "新規投稿", class: 'btn btn-success btn-block' %>
+      <% else %>
+        <%= f.submit "変更を保存", class: 'btn btn-success btn-block' %>
+      <% end %>
     </div>
 
   <% end %>
