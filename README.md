@@ -39,4 +39,5 @@
 - IDE：Cloud9
 
 ## 使用素材
-使用検討中です
+- https://pixabay.com/ja/
+  フリー画像素材
