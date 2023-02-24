@@ -1,175 +1,185 @@
-  <div class='row'>
-    <div class='col-sm-10'>
-      <h3>Photo</h3>
+  <div style = "background-color: #FFF;">
+    <div class='row p-2'>
+      <div class='col-sm-10'>
+        <h3>Photo</h3>
+      </div>
+
+      <!--新規投稿画面アイコン-->
+      <%= render 'public/photos/new_post_btn' %>
+    </div><br>
+
+    <!--ユーザー詳細画面へのリンク-->
+    <div class = "pl-2">
+      <p>投稿者
+        <%= link_to(@photo.user) do %>
+          <%= @photo.user.name %>
+        <% end %>
+      </p>
     </div>
 
-    <!--新規投稿画面アイコン-->
-    <%= render 'public/photos/new_post_btn' %>
-  </div><br>
+    <div class='row'>
+      <!--写真の表示-->
+      <div class='col-6'>
+        <%= image_tag @photo.photo_image, size:"510x340" %>
+      </div>
 
-  <!--ユーザー詳細画面へのリンク-->
-  <p>投稿者
-    <%= link_to(@photo.user) do %>
-      <%= @photo.user.name %>
-    <% end %>
-  </p>
-
-  <div class='row'>
-    <!--写真の表示-->
-    <div class='col-6'>
-      <%= image_tag @photo.photo_image, size:"510x340" %>
-    </div>
-
-    <!--情報の表示-->
-    <div class='col-xl-6'>
-      <table>
-        <!--情報の入力の有無による分岐-->
-        <% if @photo.camera_name.present? %>
-        <tr>
-          <td style = "white-space: nowrap";>
-            カメラ
-          </td>
-          <td style = "padding-left: 10px";>
-            <%= @photo.camera_name %>
-          </td>
-        </tr>
-        <% else %>
-        <% end %>
-
-        <tr>
-          <td style = "white-space: nowrap";>
-            焦点距離
-          </td>
-          <td style = "padding-left: 10px";>
-            <%= @photo.focal_length %>mm
-          </td>
-        </tr>
-
-        <tr>
-          <td style = "white-space: nowrap";>
-            F値
-          </td>
-          <td style = "padding-left: 10px";>
-            <%= @photo.focal_number %>
-          </td>
-        </tr>
-
-        <tr>
-          <td style = "white-space: nowrap";>
-            SS
-          </td>
-          <td style = "padding-left: 10px";>
-            <%= @photo.shutter_speed %>s
-          </td>
-        </tr>
-
-        <tr>
-          <td style = "white-space: nowrap";>
-            ISO感度
-          </td>
-          <td style = "padding-left: 10px";>
-            <%= @photo.iso %>
-          </td>
-        </tr>
-
-        <tr>
-          <td style = "white-space: nowrap";>
-            周辺機器
-          </td>
-          <td style = "padding-left: 10px";>
-            <%= @photo.accessory %>
-          </td>
-        </tr>
-
-        <tr>
-          <td style = "white-space: nowrap";>
-            編集
-          </td>
-          <td style = "padding-left: 10px";>
-            <% if @photo.edit_pictuer == false %>
-              なし
-            <% else %>
-              あり
-            <% end %>
-          </td>
-        </tr>
-
-        <!--県の表示-->
-        <% if @photo.prefectures == "未選択" %>
-        <% else %>
+      <!--情報の表示-->
+      <div class='col-xl-5 ml-2'>
+        <table>
+          <!--情報の入力の有無による分岐-->
+          <% if @photo.camera_name.present? %>
           <tr>
             <td style = "white-space: nowrap";>
-              都道府県
+              カメラ
             </td>
             <td style = "padding-left: 10px";>
-              <%= @photo.prefectures %>
+              <%= @photo.camera_name %>
             </td>
           </tr>
-        <% end %>
+          <% else %>
+          <% end %>
 
-        <!--撮影場所の表示-->
-        <% if @photo.region.present? %>
           <tr>
             <td style = "white-space: nowrap";>
-              撮影場所
+              焦点距離
             </td>
             <td style = "padding-left: 10px";>
-              <%= @photo.region %>
+              <%= @photo.focal_length %>mm
             </td>
           </tr>
-        <% else %>
-        <% end %>
 
-        <!--コメントの表示-->
-        <% if @photo.opinion.present? %>
           <tr>
             <td style = "white-space: nowrap";>
-              Text
+              F値
             </td>
             <td style = "padding-left: 10px";>
-              <%= @photo.opinion %>
+              <%= @photo.focal_number %>
             </td>
           </tr>
-        <% else %>
-        <% end %>
 
-        <!--タグの表示-->
-        <% if @photo.tag_relations.present? %>
           <tr>
             <td style = "white-space: nowrap";>
-              タグ
+              SS
             </td>
-            <td style = "padding-left: 10px";,"white-space: nowrap";>
-              <% @photo.tag_relations.each do |tag_relation| %>
-                #<%= tag_relation.tag.tag_name %>
+            <td style = "padding-left: 10px";>
+              <%= @photo.shutter_speed %>s
+            </td>
+          </tr>
+
+          <tr>
+            <td style = "white-space: nowrap";>
+              ISO感度
+            </td>
+            <td style = "padding-left: 10px";>
+              <%= @photo.iso %>
+            </td>
+          </tr>
+
+          <tr>
+            <td style = "white-space: nowrap";>
+              周辺機器
+            </td>
+            <td style = "padding-left: 10px";>
+              <%= @photo.accessory %>
+            </td>
+          </tr>
+
+          <tr>
+            <td style = "white-space: nowrap";>
+              編集
+            </td>
+            <td style = "padding-left: 10px";>
+              <% if @photo.edit_pictuer == false %>
+                なし
+              <% else %>
+                あり
               <% end %>
             </td>
           </tr>
-        <% else %>
-        <% end %>
-      </table>
 
-      <!--自分の投稿の場合編集と削除リンクを表示する-->
-      <% if @photo.user == current_user %>
-        <br>
-        <%= link_to "Edit", edit_photo_path(@photo.id), class:"btn btn-sm btn-success" %>
-        |
-        <%= link_to "Destroy", photo_path(@photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
-      <% end %><br>
+          <!--県の表示-->
+          <% if @photo.prefectures == "未選択" %>
+          <% else %>
+            <tr>
+              <td style = "white-space: nowrap";>
+                都道府県
+              </td>
+              <td style = "padding-left: 10px";>
+                <%= @photo.prefectures %>
+              </td>
+            </tr>
+          <% end %>
 
-      <!--いいね機能-->
-      <p id = "favorite_buttons_<%= @photo.id %>">
-        <%= render 'public/favorites/favorites', photo: @photo %>
-      </p>
+          <!--撮影場所の表示-->
+          <% if @photo.region.present? %>
+            <tr>
+              <td style = "white-space: nowrap";>
+                撮影場所
+              </td>
+              <td style = "padding-left: 10px";>
+                <%= @photo.region %>
+              </td>
+            </tr>
+          <% else %>
+          <% end %>
+
+          <!--コメントの表示-->
+          <% if @photo.opinion.present? %>
+            <tr>
+              <td style = "white-space: nowrap";>
+                Text
+              </td>
+              <td style = "padding-left: 10px";>
+                <%= @photo.opinion %>
+              </td>
+            </tr>
+          <% else %>
+          <% end %>
+
+          <!--タグの表示-->
+          <% if @photo.tag_relations.present? %>
+            <tr>
+              <td style = "white-space: nowrap";>
+                タグ
+              </td>
+              <td style = "padding-left: 10px";,"white-space: nowrap";>
+                <% @photo.tag_relations.each do |tag_relation| %>
+                  #<%= tag_relation.tag.tag_name %>
+                <% end %>
+              </td>
+            </tr>
+          <% else %>
+          <% end %>
+        </table>
+
+        <!--自分の投稿の場合編集と削除リンクを表示する-->
+        <% if @photo.user == current_user %>
+          <br>
+          <%= link_to "Edit", edit_photo_path(@photo.id), class:"btn btn-sm btn-success" %>
+          |
+          <%= link_to "Destroy", photo_path(@photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
+        <% end %><br>
+
+        <!--いいね機能-->
+        <p id = "favorite_buttons_<%= @photo.id %>">
+          <%= render 'public/favorites/favorites', photo: @photo %>
+        </p>
+      </div>
     </div>
-  </div>
 
-　<!--コメントの表示及び、削除-->
-　<div id="comments_area">
-    <%= render 'public/photo_comments/comments', photo: @photo %>
-  </div>
+    <div class = "row p-2">
+      <!--コメントの表示及び、削除-->
+      <div class = "col-12">
+      　<div id="comments_area">
+          <%= render 'public/photo_comments/comments', photo: @photo %>
+        </div>
+      </div>
 
-  <!--エラーと投稿入力フォーム-->
-  <div class="new-comment">
-    <%= render 'public/photo_comments/form', comment: @comment, photo_comment: @photo_comment %>
+      <!--エラーと投稿入力フォーム-->
+      <div class = "col-12">
+        <div class="new-comment">
+          <%= render 'public/photo_comments/form', comment: @comment, photo_comment: @photo_comment %>
+        </div>
+      </div>
+    </div>
   </div>

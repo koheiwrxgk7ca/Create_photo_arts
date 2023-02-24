@@ -1,35 +1,37 @@
-  <h3>ユーザー一覧画面</h3>
+  <div style = "background-color: #FFF;">
+    <div class = "p-2">
+      <h3>ユーザー一覧画面</h3>
 
-  <div class = "row">
-  <!--ユーザー検索-->
-  <%= render 'public/users/sarch_users', q: @q, path: admin_top_path %>
+      <!--ユーザー検索-->
+      <%= render 'public/users/sarch_users', q: @q, path: admin_top_path %>
 
-    <table class = "table">
-      <% @users.each do |user| %>
-      <tr>
-        <td>
-          ID <%= user.id %>
-        </td>
-        <td>
-          <%= link_to admin_user_path(user) do %>
-            <%= user.name %>
-          <% end %>
-        </td>
-        <td>
-          <%= user.email %>
-        </td>
-        <td>
-          <% if user.is_deleted == false %>
-           <p class = text-success>有効</p>
-          <% else %>
-           <p class = text-danger>退会</p>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
+      <table class = "table">
+        <% @users.each do |user| %>
+        <tr>
+          <td>
+            ID <%= user.id %>
+          </td>
+          <td>
+            <%= link_to admin_user_path(user) do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= user.email %>
+          </td>
+          <td>
+            <% if user.is_deleted == false %>
+             <p class = text-success>有効</p>
+            <% else %>
+             <p class = text-danger>退会</p>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
 
-  <div class = "d-flex justify-content-center">
-      <%= paginate @users %>
+      <div class = "d-flex justify-content-center">
+          <%= paginate @users %>
+      </div>
+    </div>
   </div>

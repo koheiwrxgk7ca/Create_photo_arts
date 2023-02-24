@@ -1,41 +1,41 @@
-<div class="login-container", style= "margin:50px 0px 50px;">
-  <div class= "d-flex justify-content-center h-100">
-    <div class= "card">
-      <div class= "card-header">
-        <h2>管理者ログイン</h2>
-      </div>
-
-      <div class= "card-body">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="form-group">
-            <i class="fas fa-mail-bulk"></i>
-            <%= f.label :email, "メールアドレス" %>
-            <div class="form-control">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "sample@example.com", size: "55" %>
-            </div>
-          </div>
-          <div class="form-group">
-            <i class = "fas fa-key"></i>
-            <%= f.label :password, "パスワード" %>
-            <div class="form-control">
-            <%= f.password_field :password, autocomplete: "current-password", size: "55" %>
-            </div>
+    <div class="login-container", style= "padding:50px 0px 50px;">
+      <div class= "d-flex justify-content-center h-100">
+        <div class= "card">
+          <div class= "card-header">
+            <h2>管理者ログイン</h2>
           </div>
 
-          <% if devise_mapping.rememberable? %>
-            <div class="field">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me, "パスワードを忘れた" %>
-            </div>
-          <% end %>
+          <div class= "card-body">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-group">
+                <i class="fas fa-mail-bulk"></i>
+                <%= f.label :email, "メールアドレス" %>
+                <div class="form-control">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "sample@example.com", size: "55" %>
+                </div>
+              </div>
+              <div class="form-group">
+                <i class = "fas fa-key"></i>
+                <%= f.label :password, "パスワード" %>
+                <div class="form-control">
+                <%= f.password_field :password, autocomplete: "current-password", size: "55" %>
+                </div>
+              </div>
 
-          <div class="actions">
-            <%= f.submit "ログイン", class:"btn btn-sm btn-primary float-right" %>
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me, "パスワードを忘れた" %>
+                </div>
+              <% end %>
+
+              <div class="actions">
+                <%= f.submit "ログイン", class:"btn btn-sm btn-primary float-right" %>
+              </div>
+            <% end %>
+
+            <%= render "admin/shared/links", class:"btn btn-sm btn-primary" %>
           </div>
-        <% end %>
-
-        <%= render "admin/shared/links", class:"btn btn-sm btn-primary" %>
+        </div>
       </div>
     </div>
-  </div>
-</div>

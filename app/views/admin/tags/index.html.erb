@@ -1,26 +1,30 @@
-<h3>タグ一覧・追加</h3>
+  <div style = "background-color: #FFF;">
+    <div class = "p-2">
+      <h3>タグ一覧・追加</h3>
 
-<%= form_with model: @tag, url: admin_tags_path, local:true do |f| %>
-  <%= f.label :tag_name, "タグ名" %>
-  <%= f.text_field :tag_name, placeholder: "タグ名" %>
-  <%= f.submit"新規登録", class:"btn btn-success" %>
-<% end %>
+      <%= form_with model: @tag, url: admin_tags_path, local:true do |f| %>
+        <%= f.label :tag_name, "タグ名" %>
+        <%= f.text_field :tag_name, placeholder: "タグ名" %>
+        <%= f.submit"新規登録", class:"btn btn-success" %>
+      <% end %>
 
-<table class= "table">
-  <thead>
-    <tr class="table-secondary">
-      <th>タグ</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <table class= "table">
+        <thead>
+          <tr class="table-secondary">
+            <th>タグ</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-   <% @tags.each do |tag| %>
-    <tr>
-      <td><%= tag.tag_name %></td>
-      <td><%= link_to "編集する", edit_admin_tag_path(tag), class: 'btn btn-sm btn-success btn-block' %></td>
-      <td><%= link_to "削除する", admin_tag_path(tag), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %></td>
-    </tr>
-   <% end %>
-  </tbody>
-</table>
+        <tbody>
+         <% @tags.each do |tag| %>
+          <tr>
+            <td><%= tag.tag_name %></td>
+            <td><%= link_to "編集する", edit_admin_tag_path(tag), class: 'btn btn-sm btn-success btn-block' %></td>
+            <td><%= link_to "削除する", admin_tag_path(tag), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %></td>
+          </tr>
+         <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

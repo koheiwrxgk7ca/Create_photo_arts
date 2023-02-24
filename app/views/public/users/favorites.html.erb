@@ -1,18 +1,22 @@
-  <div class='row'>
-    <div class='col-sm-10'>
-      <% if @user == current_user %>
-        <h3>favorites</h3>
-      <% else %>
-        <h3>favorites <%= @user.name %></h3>
-      <% end %>
+  <div style = "background-color: #FFF;">
+    <div class='row p-2'>
+      <div class='col-sm-10'>
+        <% if @user == current_user %>
+          <h3>favorites</h3>
+        <% else %>
+          <h3>favorites <%= @user.name %></h3>
+        <% end %>
+      </div>
+
+      <!--新規投稿画面アイコン-->
+      <%= render 'public/photos/new_post_btn' %>
+    </div><br>
+
+    <!--投稿検索フォーム-->
+    <div class = "pl-2">
+      <%= render 'public/photos/sarch_photos', prefectures: @prefectures, path: favorites_user_path(@user) %>
     </div>
 
-    <!--新規投稿画面アイコン-->
-    <%= render 'public/photos/new_post_btn' %>
-  </div><br>
-
-  <!--投稿検索フォーム-->
-  <%= render 'public/photos/sarch_photos', prefectures: @prefectures, path: favorites_user_path(@user) %>
-
-  <!--お気に入り投稿一覧-->
-  <%= render 'public/photos/photos_table', photos: @favorite_photos %>
+    <!--お気に入り投稿一覧-->
+    <%= render 'public/photos/photos_table', photos: @favorite_photos %>
+  </div>

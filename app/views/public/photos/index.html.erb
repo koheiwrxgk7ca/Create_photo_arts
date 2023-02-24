@@ -1,14 +1,18 @@
-  <div class = 'row'>
-    <div class = 'col-sm-10'>
-      <h3>Photos</h3>
+  <div style = "background-color: #FFF;">
+    <div class = 'row-p2'>
+      <div class = 'col-sm-10'>
+        <h3>Photos</h3>
+      </div>
+
+      <!--新規投稿画面アイコン-->
+      <%= render 'public/photos/new_post_btn' %>
+    </div><br>
+
+    <!--投稿検索フォーム-->
+    <div class = "pl-2">
+      <%= render 'public/photos/sarch_photos', prefectures: @prefectures, path: photos_path %>
     </div>
 
-    <!--新規投稿画面アイコン-->
-    <%= render 'public/photos/new_post_btn' %>
-  </div><br>
-
-  <!--投稿検索フォーム-->
-  <%= render 'public/photos/sarch_photos', prefectures: @prefectures, path: photos_path %>
-
-  <!--全投稿表示-->
-  <%= render 'public/photos/photos_table', photos: @photos %>
+    <!--全投稿表示-->
+    <%= render 'public/photos/photos_table', photos: @photos %>
+  </div>

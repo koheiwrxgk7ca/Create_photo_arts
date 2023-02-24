@@ -9,97 +9,68 @@
 
   <%= form_with model:photo, url: path, local:true do |f| %>
 
-    <% if current_page?(new_photo_path) %>
-      <p>※は入力必須です</p>
-    <% else %>
-    <% end %>
+    <p>*は入力必須です</p>
 
     <div class = "form-group">
-      <% if current_page?(new_photo_path) %>
-        <%= f.label :photo_image, "※写真" %>
-      <% else %>
-        <%= f.label :photo_image, "写真" %>
-      <% end %>
+      <%= f.label :photo_image, "*写真" %>
       <%= f.file_field :photo_image, class: "form-control-file photo_image", accept: 'image/*' %>
     </div>
 
     <div class = "row">
-      <div class = "col-lg-2">
+      <div class = "col-lg-3">
         <%= f.label :camera_name, "カメラ名" %><br>
         <%= f.text_field :camera_name, placeholder: "カメラ名" %>
       </div>
 
 
-      <div class = "col-lg-2">
-        <% if current_page?(new_photo_path) %>
-          <%= f.label :focal_length, "※焦点距離" %><br>
-        <% else %>
-          <%= f.label :focal_length, "焦点距離" %><br>
-        <% end %>
+      <div class = "col-lg-3">
+        <%= f.label :focal_length, "*焦点距離" %><br>
         <%= f.text_field :focal_length, placeholder: "焦点距離" %>
       </div>
     </div>
 
     <div class = "row">
-      <div class = "col-lg-2">
-        <% if current_page?(new_photo_path) %>
-          <%= f.label :focal_number, "※F値" %><br>
-        <% else %>
-          <%= f.label :focal_number, "F値" %><br>
-        <% end %>
+      <div class = "col-lg-3">
+        <%= f.label :focal_number, "*F値" %><br>
         <%= f.text_field :focal_number, placeholder: "F値" %>
       </div>
 
-      <div class ="col-lg-2">
-        <% if current_page?(new_photo_path) %>
-          <%= f.label :shutter_speed, "※SS"%><br>
-        <% else %>
-          <%= f.label :shutter_speed, "SS"%><br>
-        <% end %>
+      <div class ="col-lg-3">
+        <%= f.label :shutter_speed, "*SS"%><br>
         <%= f.text_field :shutter_speed, placeholder: "シャッタースピード" %>
       </div>
 
-      <div class = "col-lg-2">
-        <% if current_page?(new_photo_path) %>
-          <%= f.label :iso, "※ISO感度" %><br>
-        <% else %>
-          <%= f.label :iso, "ISO感度" %><br>
-        <% end %>
+      <div class = "col-lg-3">
+        <%= f.label :iso, "*ISO感度" %><br>
         <%= f.text_field :iso, placeholder: "ISO感度" %>
       </div>
     </div>
 
     <div class = "row">
-      <div class = "col-lg-2">
-        <% if current_page?(new_photo_path) %>
-          <%= f.label :accessory, "※周辺機器" %><br>
-        <% else %>
-          <%= f.label :accessory, "周辺機器" %><br>
-        <% end %>
+      <div class = "col-lg-3">
+        <%= f.label :accessory, "*周辺機器" %><br>
         <%= f.text_field :accessory, placeholder: "フィルター、ストロボ等" %>
       </div>
 
-      <div class = "col-lg-2">
-        <% if current_page?(new_photo_path) %>
-          <%= f.label :edit_pictuer, "※編集" %><br>
-        <% else %>
-          <%= f.label :edit_pictuer, "編集" %><br>
-        <% end %>
+      <div class = "col-lg-3">
+        <%= f.label :edit_pictuer, "*編集" %><br>
         <%= f.select :edit_pictuer, [['なし',0],['あり',1]], { include_blank: true, selected: 0 } %>
       </div>
     </div>
 
     <div class = "row">
-      <div class = "col-lg-2">
+      <div class = "col-lg-3">
         <%= f.label :prefectures, "都道府県" %><br>
         <%= f.select :prefectures, Photo.prefectures.keys, {} %>
       </div>
 
-      <div class = "col-lg-2">
+      <div class = "col-lg-3">
         <%= f.label :region, "撮影場所" %><br>
         <%= f.text_field :region, placeholder: "～付近" %>
       </div>
+    </div>
 
+    <div class = "row">
       <div class = "col-lg-8">
         <div class='form-group'>
           <%= f.label :tag_id,"タグ" %><br>
@@ -118,11 +89,7 @@
     <%= f.text_area :opinion, class:"form-control", rows:"3", placeholder: "Text 100文字以内" %><br>
 
     <div class="form-group">
-      <% if current_page?(new_photo_path) %>
-        <%= f.submit "新規投稿", class: 'btn btn-success btn-block' %>
-      <% else %>
-        <%= f.submit "変更を保存", class: 'btn btn-success btn-block' %>
-      <% end %>
+      <%= f.submit "投稿する", class: 'btn btn-success btn-block' %>
     </div>
 
   <% end %>

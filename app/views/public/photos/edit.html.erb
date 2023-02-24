@@ -1,4 +1,10 @@
-  <h3>Post edit</h3>
+  <div style = "background-color: #FFF;">
+    <div class = "p-2">
+      <h3>Post edit</h3>
 
-  <!--編集フォーム-->
-  <%= render 'public/photos/post', photo: @photo, path: photo_path(@photo) %>
+      <div class = "p-4">
+        <!--編集フォーム-->
+        <%= render 'public/photos/post', photo: @photo, path: photo_path(@photo) %>
+      </div>
+    </div>
+  </div>

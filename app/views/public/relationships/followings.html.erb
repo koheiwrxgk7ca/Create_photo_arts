@@ -1,14 +1,18 @@
-  <div class='row'>
-    <div class='col-8'>
-      <h3>Followings <%= @user.name %></h3>
-    </div>
-    <div class='col-md-3'>
-      <%=link_to"Follower",user_followers_path, class:"btn btn-sm btn-success" %>
-    </div>
-  </div><br>
+  <div style = "background-color: #FFF;">
+    <div class='row p-2'>
+      <div class='col-8'>
+        <h3>Followings <%= @user.name %></h3>
+      </div>
+      <div class='col-md-3'>
+        <%=link_to"Follower",user_followers_path, class:"btn btn-sm btn-success" %>
+      </div>
+    </div><br>
 
-  <!--ユーザー検索-->
-  <%= render 'public/users/sarch_users', q: @q, path: user_followings_path %>
+    <div class = "pl-2 pr-2">
+      <!--ユーザー検索-->
+      <%= render 'public/users/sarch_users', q: @q, path: user_followings_path %>
 
-  <!--ユーザー一覧-->
-  <%= render 'public/users/users_table', users: @users %>
+      <!--ユーザー一覧-->
+      <%= render 'public/users/users_table', users: @users %>
+    </div>
+  </div>
