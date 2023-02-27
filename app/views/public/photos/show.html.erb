@@ -21,6 +21,22 @@
       <!--写真の表示-->
       <div class='col-6'>
         <%= image_tag @photo.photo_image, size:"500x333" %>
+        <!--コメントの表示-->
+        <% if @photo.opinion.present? %>
+        <div class = 'p-2'>
+          <table>
+            <tr>
+              <td style = "white-space: nowrap";>
+                Text
+              </td>
+              <td style = "padding-left: 10px";>
+                <%= @photo.opinion %>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <% else %>
+        <% end %>
       </div>
 
       <!--情報の表示-->
@@ -123,19 +139,6 @@
           <% else %>
           <% end %>
 
-          <!--コメントの表示-->
-          <% if @photo.opinion.present? %>
-            <tr>
-              <td style = "white-space: nowrap";>
-                Text
-              </td>
-              <td style = "padding-left: 10px";>
-                <%= @photo.opinion %>
-              </td>
-            </tr>
-          <% else %>
-          <% end %>
-
           <!--タグの表示-->
           <% if @photo.tag_relations.present? %>
             <tr>
@@ -167,7 +170,7 @@
       </div>
     </div>
 
-    <div class = "row p-2">
+    <div class = "row pl-2 pr-2">
       <!--コメントの表示及び、削除-->
       <div class = "col-12">
       　<div id="comments_area">
