@@ -12,6 +12,7 @@ module CreatePhotoArts
     config.load_defaults 6.1
 
     # 日本語の言語設定。この一行を追加。
+    config.paths.add 'lib', eager_load: true # 追加
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.yml").to_s]
 

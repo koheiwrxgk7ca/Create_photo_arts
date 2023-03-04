@@ -7,6 +7,7 @@ class Public::PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
     @photo.user_id = current_user.id
+    @photo.score = Language.get_data(photo_params[:opinion])
     if @photo.save
       if params[:photo][:tag_id].present?
         tag = Tag.find(params[:photo][:tag_id])
@@ -51,6 +52,7 @@ class Public::PhotosController < ApplicationController
 
   def update
     @photo = Photo.find(params[:id])
+    @photo.score = Language.get_data(photo_params[:opinion])
     if @photo.update(photo_params)
       if params[:photo][:tag_id].present?
         @photo.tags.destroy_all
