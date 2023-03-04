@@ -6,7 +6,8 @@ class Admin::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @photos = @user.photos.order(created_at: :desc).page(params[:page]).per(10)
+    @photos = @user.photos.order(created_at: :desc).page(params[:photos_page]).per(10)
+    @comments = @user.comments.all.order(created_at: :desc).page(params[:comments_page]).per(6)
   end
 
   def update

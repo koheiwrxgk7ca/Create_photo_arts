@@ -4,7 +4,7 @@
         <h3><%= @user.name %>さんの情報編集</h3>
         <%= form_with model:@user, url: admin_user_path, local:true do |f| %>
 
-          <div class = 'ml-3'>
+          <div class = 'ml-3 pt-2'>
             <div class = 'row align-items-end'>
               <div class = 'col-sm-6'>
                 <%= f.label :name, "ニックネーム" %>
@@ -14,28 +14,80 @@
               </div>
             </div><br>
 
-            <div class = 'row align-items-end'>
-              <div class = 'col-sm-6'>
-                <%= f.label :email, "メールアドレス" %>
-              </div>
-              <div class = 'col-sm-6'>
-                <%= f.text_field :email, class: "form-control email" %>
-              </div>
-            </div><br>
+            <% if @user.email == "guest@example.com" %>
+              <div class = 'row'>
+                <div class = 'col-sm-6'>
+                  <%= f.label :email, "メールアドレス" %>
+                </div>
+                <div class = 'col-sm-6'>
+                  <%= @user.email %>
+                </div>
+              </div><br>
+            <% else %>
+              <div class = 'row align-items-end'>
+                <div class = 'col-sm-6'>
+                  <%= f.label :email, "メールアドレス" %>
+                </div>
+                <div class = 'col-sm-6'>
+                  <%= f.text_field :email, class: "form-control email" %>
+                </div>
+              </div><br>
+            <% end %>
 
-            <div class = 'row align-items-end'>
-              <div class = 'col-sm-6'>
-                <%= f.label :is_deleted, "会員ステータス" %><br>
-              </div>
-              <div class = 'col-sm-6'>
-                <%= f.radio_button :is_deleted, :false %>
-                <%= f.label :is_deleted, "有効" %>
+            <% if @user.email == "guest@example.com" %>
+              <div class = 'row'>
+                <div class = 'col-sm-6'>
+                  <%= f.label :is_deleted, "会員ステータス" %><br>
+                </div>
+                <div class = 'col-sm-6'>
+                  有効
+                </div>
+              </div><br>
+            <% else %>
+              <div class = 'row align-items-end'>
+                <div class = 'col-sm-6'>
+                  <%= f.label :is_deleted, "会員ステータス" %><br>
+                </div>
+                <div class = 'col-sm-6'>
+                  <%= f.radio_button :is_deleted, :false %>
+                  <%= f.label :is_deleted, "有効" %>
 
-                <%= f.radio_button :is_deleted, :true %>
-                <%= f.label :is_deleted, "退会" %>
-              </div>
-            </div><br>
+                  <%= f.radio_button :is_deleted, :true %>
+                  <%= f.label :is_deleted, "退会" %>
+                </div>
+              </div><br>
+            <% end %>
             <%= f.submit "変更を保存", class: 'btn btn-success' %>
+          <% end %>
+        </div><br><br>
+
+        <div>
+          <div class = 'ml-4'>
+            <h3>コメント一覧</h3>
+          </div>
+          <% if @comments.present? %>
+            <div class="card shadow-sm" style="width: 330px; float: left; margin: 5px 5px 5px 0; padding: 15px;">
+              <% @comments.each do |comment| %>
+                <% if comment.score.blank? %>
+                  <p class="sentiment-score">score<%= comment.score %></p>
+                <% elsif comment.score > 0 %>
+                  <p class="sentiment-score, text-success">score<%= comment.score %></p>
+                <% elsif comment.score < 0 %>
+                  <p class="sentiment-score, text-danger">score<%= comment.score %></p>
+                <% else %>
+                  <p class="sentiment-score">score<%= comment.score %></p>
+                <% end %>
+                <div class = "mb-2">
+                  <%= comment.photo_comment %>
+                </div>
+                <%= link_to "コメントを削除", photo_comment_path(comment.photo, comment), method: :delete, remote: true, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %><br>
+              <% end %>
+              <div class = "d-flex justify-content-center">
+                <%= paginate @comments, :param_name => 'comments_page' %>
+              </div>
+            </div>
+          <% else %>
+            <br>
           <% end %>
         </div>
       </div>
@@ -43,7 +95,9 @@
       <div class = 'col-xl-8'>
         <div class='row'>
           <div class = 'col'>
-            <h3><%= @user.name %>さんの投稿一覧</h3>
+            <div class = 'ml-4'>
+              <h3>投稿一覧</h3>
+            </div>
             <% @photos.each do |photo| %>
               <div class="card shadow-sm" style="width: 330px; float: left; margin: 5px 5px 5px 0; padding: 15px;">
                 <div class = 'row'>
@@ -79,7 +133,7 @@
         </div><br>
 
         <div class = "d-flex justify-content-center">
-          <%= paginate @photos %>
+          <%= paginate @photos, :param_name => 'photos_page' %>
         </div>
 
       </div>
