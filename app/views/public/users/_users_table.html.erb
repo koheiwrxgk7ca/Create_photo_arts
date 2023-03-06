@@ -1,22 +1,32 @@
-  <table class = "table">
+  <div class = 'pt-3 pb-3'>
     <% users.each do |user| %>
-    <tr>
-      <td>
-        <%= image_tag user.get_profile_image, size: '100x100' %>
-      </td>
-      <td>
-        <%= link_to user_path(user) do %>
-          <%= user.name %>
-        <% end %>
-      </td>
-      <td id="relationship_buttons_<%= user.id %>">
-        <% unless user == current_user %>
-          <%= render 'public/relationships/relationships', user: user %>
-        <% end %>
-      </td>
-    </tr>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class = 'row'>
+            <div class = 'col-5'>
+              <%= image_tag user.get_profile_image, size: '100x100' %>
+            </div>
+            <div class = 'col-7'>
+              <div class = 'row pt-4'>
+                <div class = 'col-sm-12 col-md-6'>
+                  <%= link_to user_path(user) do %>
+                    <p><%= user.name %></p>
+                  <% end %>
+                </div>
+                <div class = 'col-md-6'>
+                  <div id="relationship_buttons_<%= user.id %>">
+                    <% unless user == current_user %>
+                      <%= render 'public/relationships/relationships', user: user %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     <% end %>
-  </table>
+  </div>
 
   <div class = "d-flex justify-content-center">
     <%= paginate users %>

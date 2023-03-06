@@ -1,6 +1,6 @@
     <div class="login-container", style= "padding:50px 0px 50px;">
       <div class= "d-flex justify-content-center h-100">
-        <div class= "card">
+        <div class= "card" style="width: 30rem;">
           <div class= "card-header">
             <h3>ログイン</h3>
           </div>
@@ -11,7 +11,7 @@
                 <i class="fas fa-mail-bulk"></i>
                 <%= f.label :email, "メールアドレス" %>
                 <div class="form-control">
-                <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "sample@example.com", size: "55" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "sample@example.com", style: "width:100%" %>
                 </div>
               </div>
 
@@ -19,7 +19,7 @@
                 <i class = "fas fa-key"></i>
                 <%= f.label :password, "パスワード" %>
                 <div class="form-control">
-                <%= f.password_field :password, autocomplete: "current-password", size: "55" %>
+                <%= f.password_field :password, autocomplete: "current-password", style: "width:100%" %>
                 </div>
               </div>
 

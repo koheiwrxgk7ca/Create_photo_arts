@@ -1,7 +1,7 @@
   <div style = "background-color: #FFF;">
     <div class='row p-2'>
       <div class='col-8'>
-        <h3>Followers <%= @user.name %></h3>
+        <h3>Followers<br><%= @user.name %></h3>
       </div>
       <div class='col-md-3'>
         <%=link_to"Followings",user_followings_path, class:"btn btn-sm btn-success" %>
