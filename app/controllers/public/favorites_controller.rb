@@ -11,4 +11,13 @@ class Public::FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(photo_id: @photo.id)
     favorite.destroy
   end
+
+  def userlist
+    # @photo = Photo.find(params[:photo_id])
+    # @user = @photo.user
+    # @favorites = Favorite.where(user_id: @photo.id)
+    @photo = Photo.find(params[:photo_id])
+    user = @photo.user
+    @favorites = user.favorites
+  end
 end

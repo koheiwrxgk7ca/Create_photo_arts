@@ -1,33 +1,79 @@
   <div style = "background-color: #000000;">
-    <div class="row p-3">
-      <div class="mx-auto">
-        <div style="position: relative; display:inline-block;">
-          <div class = "row no-gutters">
-            <div class = "col-sm-12 col-md-9 col-lg-6">
-              <div class = "row ml-1 mr-1">
-                <%= image_tag 'camera-5452977_960_720.jpg', alt: 'top用画像', size: '480x320', class: "img-fluid" %>
+    <!--画面幅によって表示内容の変更-->
+    <div class="d-md-none d-lg-block d-xl-block">
+      <div class="row p-3">
+        <div class="mx-auto">
+          <div style="position: relative; display:inline-block;">
+            <div class = "row no-gutters">
+              <div class = "col-sm-12 col-md-9 col-lg-6">
+                <div class = "row ml-1 mr-1">
+                  <%= image_tag 'camera-5452977_960_720.jpg', alt: 'top用画像', size: '480x320', class: "img-fluid" %>
+                </div>
+              </div>
+              <div class = "col-sm-12 col-md-9 col-lg-6">
+                <div class = "row no-gutters">
+                  <div class = "col-6">
+                    <%= image_tag 'cat__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
+                  </div>
+                  <div class = "col-6">
+                    <%= image_tag 'milky-way__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
+                  </div>
+                </div>
+                <div class = "row no-gutters">
+                  <div class = "col-6">
+                    <%= image_tag 'pink-324175__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
+                  </div>
+                  <div class = "col-6">
+                    <%= image_tag 'tree-1959267__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class = "col-sm-12 col-md-9 col-lg-6">
-              <div class = "row no-gutters">
-                <div class = "col-6">
-                  <%= image_tag 'cat__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
-                </div>
-                <div class = "col-6">
-                  <%= image_tag 'milky-way__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
-                </div>
-              </div>
-              <div class = "row no-gutters">
-                <div class = "col-6">
-                  <%= image_tag 'pink-324175__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
-                </div>
-                <div class = "col-6">
-                  <%= image_tag 'tree-1959267__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
-                </div>
-              </div>
+            <div style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; padding: 30px; text-align: left; color: #E6DBD0;">
+            <p style="font-family: Hiragino Maru Gothic Pro; font-size: 2.6vmin;" >
+              ようこそ、Create photo artsへ<br>
+              ここは、あなたのとっておきのカメラで撮影した<br>
+              作品を投稿するSNSサイトです<br>
+              鑑賞をして楽しむも良し、様々な作品から<br>
+              インスピレーションを得るも良し<br>
+              是非あなたなりの楽しみ方を見つけてみてください
+            </p>
             </div>
           </div>
-            <div style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; padding: 30px; text-align: left; color: #E6DBD0;">
+        </div>
+      </div>
+    </div>
+    <!--画面幅によって表示内容の変更-->
+    <div class="d-none d-md-block d-lg-none d-xl-none">
+      <div class="row p-3 ml-4">
+        <div class="mx-auto">
+          <div style="position: relative; display:inline-block;">
+            <div class = "row no-gutters">
+              <div class = "col-sm-12 col-md-9 col-lg-6 offset-md-1">
+                <div class = "row ml-1 mr-1">
+                  <%= image_tag 'camera-5452977_960_720.jpg', alt: 'top用画像', size: '480x320', class: "img-fluid" %>
+                </div>
+              </div>
+              <div class = "col-sm-12 col-md-9 col-lg-6 offset-md-1">
+                <div class = "row no-gutters">
+                  <div class = "col-6">
+                    <%= image_tag 'cat__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
+                  </div>
+                  <div class = "col-6">
+                    <%= image_tag 'milky-way__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
+                  </div>
+                </div>
+                <div class = "row no-gutters">
+                  <div class = "col-6">
+                    <%= image_tag 'pink-324175__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
+                  </div>
+                  <div class = "col-6">
+                    <%= image_tag 'tree-1959267__340.jpg', alt: 'about用画像', size: '240x160', class: "img-fluid" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="position: absolute; top: 0; left: 45px; max-width: 100%; max-height: 100%; padding: 30px; text-align: left; color: #E6DBD0;">
             <p style="font-family: Hiragino Maru Gothic Pro; font-size: 2.6vmin;" >
               ようこそ、Create photo artsへ<br>
               ここは、あなたのとっておきのカメラで撮影した<br>

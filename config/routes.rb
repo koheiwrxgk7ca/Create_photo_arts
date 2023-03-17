@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
     resources :photos do
       resource :favorites, only: [:create, :destroy]
+      get 'userlist' => 'favorites#userlist', as: 'userlist'
       resources :comments, only: [:create, :destroy]
     end
 

@@ -51,7 +51,7 @@
               <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-success" %></p>
             </div>
             <div class='col-md-6'>
-              <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
+              <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-favorite" %></p>
             </div>
           </div>
         <% else %>
@@ -63,7 +63,7 @@
               </div>
             </div>
             <div class='col-md-6'>
-              <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-success" %></p>
+              <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-favorite" %></p>
             </div>
           </div>
         <% end %>

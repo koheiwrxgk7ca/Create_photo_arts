@@ -19,12 +19,12 @@
         <% end %>
 
         <% if user_signed_in? %>
-          <div style="margin: 10px; color: #fff;">Welcome to <%= current_user.name %>！</div>
+          <div style="margin: 10px; color: #F5F5DC;">Welcome to <%= current_user.name %>！</div>
         <% end %>
 
         <!--ハンバーガーメニューへの切り替え-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon", style="color:#fff;"><i class= "fas fa-list"></i></span>
+         <span class="navbar-toggler-icon", style="color: #F5F5DC;"><i class= "fas fa-list"></i></span>
         </button>
 
         <!--ナビゲーションが閉じたり開いたりする動作-->
@@ -34,61 +34,72 @@
         <% if user_signed_in? %>
             <li style="margin: 10px;">
               <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
-                <i class="fas fa-sign-out-alt"></i> Log out
+                <i class="fas fa-sign-out-alt" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Log out</span>
               <% end %>
             </li>
             <li style="margin: 10px;">
               <%= link_to photos_path, class: 'nav-link text-dark' do %>
-                <i class="fas fa-photo-video"></i> Photos
+                <i class="fas fa-photo-video" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Photos</span>
               <% end %>
             </li>
             <li style="margin: 10px;">
               <%= link_to users_path, class: 'nav-link text-dark' do %>
-                <i class="fas fa-users"></i> Users
+                <i class="fas fa-users" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Users</span>
               <% end %>
             </li>
             <li style="margin: 10px;">
               <%= link_to current_user, class: 'nav-link text-dark' do %>
-                <i class="fas fa-home"></i> Home
+                <i class="fas fa-home" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Home</span>
               <% end %>
             </li>
 
         <% elsif admin_signed_in? %>
             <li style="margin: 10px;">
               <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' do %>
-                <i class="fas fa-sign-out-alt"></i> Log out
+                <i class="fas fa-sign-out-alt" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Log out</span>
               <% end %>
             </li>
             <li style="margin: 10px;">
               <%= link_to admin_top_path, class: 'nav-link text-dark' do %>
-                <i class="fas fa-users-cog"></i> Member
+                <i class="fas fa-users-cog" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Member</span>
               <% end %>
             </li>
             <li style="margin: 10px;">
               <%= link_to admin_tags_path, class: 'nav-link text-dark' do %>
-                <i class="fas fa-hashtag"></i> Tag
+                <i class="fas fa-hashtag" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Tag</span>
               <% end %>
             </li>
 
         <% else %>
             <li style="margin: 10px;">
               <%=  link_to user_session_path, class: 'nav-link text-dark' do %>
-                <i class="fas fa-sign-in-alt"></i> Log in
+                <i class="fas fa-sign-in-alt" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Log in</span>
               <% end %>
             </li>
             <li style="margin: 10px;">
               <%= link_to new_user_registration_path, class: 'nav-link text-dark' do %>
-                <i class="fas fa-user-plus"></i> Sign up
+                <i class="fas fa-user-plus" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Sign up</span>
               <% end %>
             </li>
             <li style="margin: 10px;">
               <%= link_to about_path, class: 'nav-link text-dark' do %>
-                <i class="fas fa-book-open"></i> About
+                <i class="fas fa-book-open" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">About</span>
               <% end %>
             </li>
             <li style="margin: 10px;">
               <%= link_to root_path, class: 'nav-link text-dark' do %>
-                <i class="fas fa-desktop"></i> Home
+                <i class="fas fa-desktop" style="margin-right: 5px; color: #440000;"></i>
+                <span style="font-family: 'Book Antiqua', serif;">Home</span>
               <% end %>
             </li>
         <% end %>
@@ -110,13 +121,13 @@
     <div class="container">
       <div class="row">
         <div class="mx-auto">
-          <i class="fab fa-line" style="font-size: 2em; margin: 10px; color: #453232;"></i>
-          <i class="fab fa-twitter-square" style="font-size: 2em; margin: 10px; color: #453232;"></i>
-          <i class="fab fa-instagram" style="font-size: 2em; margin: 10px; color: #453232;"></i>
-          <i class="fab fa-youtube-square" style="font-size: 2em; margin: 10px; color: #453232;"></i>
-          <p style="color: #fff; text-align: center;">Create_photo_arts©yama</p>
+          <i class="fab fa-line" style="font-size: 2em; margin: 10px; color: #00CC66;"></i>
+          <i class="fab fa-twitter-square" style="font-size: 2em; margin: 10px; color: #3399FF;"></i>
+          <i class="fab fa-instagram" style="font-size: 2em; margin: 10px; color: #FF00CC;"></i>
+          <i class="fab fa-youtube-square" style="font-size: 2em; margin: 10px; color: #CC0000;"></i>
+          <p style="font-family: 'Book Antiqua', serif; color: #F5F5DC; text-align: center;">Create_photo_arts©yama</p>
         </div>
       </div>
     </div>
   </footer>
-  </html>
+</html>
