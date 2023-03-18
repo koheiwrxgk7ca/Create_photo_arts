@@ -6,8 +6,11 @@
         <tr>
           <td>
             <%= image_tag comment.user.get_profile_image, size: '50x50' %><br>
-            <%=link_to user_path(comment.user.id) do %>
-              <%= comment.user.name %>
+            <% if comment.user == current_user %>
+            <% else %>
+              <%=link_to user_path(comment.user.id) do %>
+                <%= comment.user.name %>
+              <% end %>
             <% end %>
           </td>
           <td>
