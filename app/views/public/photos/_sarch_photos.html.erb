@@ -1,10 +1,10 @@
   <%= form_with url: path, method: :get, local: true do |f| %>
     <div class = "form-row">
       <div class = "col">
-        <%= f.select :prefecture, prefectures, { include_blank: "都道府県検索", selected: params[:prefecture] }, { class: "form-control" } %>
+        <%= f.select :prefecture, prefectures, { include_blank: "都道府県", selected: params[:prefecture] }, { class: "form-control" } %>
       </div>
       <div class = "col">
-        <%= f.collection_select :tag_id, Tag.all, :id, :tag_name, { include_blank: "タグ検索", selected: params[:tag_id] }, { class: "form-control" } %>
+        <%= f.collection_select :tag_id, Tag.all, :id, :tag_name, { include_blank: "#タグ", selected: params[:tag_id] }, { class: "form-control" } %>
       </div>
       <div class = "col">
         <%= f.submit "検索する", class: "btn btn-sarch" %>
