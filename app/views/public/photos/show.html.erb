@@ -155,10 +155,19 @@
           <% end %>
         </table>
         <div class = 'pl-3'>
-          <!--いいね機能-->
-          <p id = "favorite_buttons_<%= @photo.id %>">
-            <%= render 'public/favorites/favorites', photo: @photo %>
-          </p>
+          <div class = 'row'>
+            <!--いいね機能-->
+            <div class = 'col-2'>
+              <p id = "favorite_buttons_<%= @photo.id %>">
+                <%= render 'public/favorites/favorites', photo: @photo %>
+              </p>
+            </div>
+            <div class = 'col'>
+              <%= link_to photo_userlist_path(@photo) do %>
+                <i class="fas fa-star" style="color: #b0c4de;"></i>
+              <% end %>
+            </div>
+          </div>
           <!--自分の投稿の場合編集と削除リンクを表示する-->
           <% if @photo.user == current_user %>
             <br>

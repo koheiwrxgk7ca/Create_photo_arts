@@ -13,11 +13,10 @@ class Public::FavoritesController < ApplicationController
   end
 
   def userlist
-    # @photo = Photo.find(params[:photo_id])
-    # @user = @photo.user
-    # @favorites = Favorite.where(user_id: @photo.id)
     @photo = Photo.find(params[:photo_id])
-    user = @photo.user
-    @favorites = user.favorites
+    @favorites = Favorite.where(photo_id: @photo.id)
+    @users = User.find(@favorites.pluck(:user_id))
+    .sort {|a,b| b.favorites.find_by(photo_id: @photo.id).created_at <=> a.favorites.find_by(photo_id: @photo.id).created_at  }
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
   end
 end

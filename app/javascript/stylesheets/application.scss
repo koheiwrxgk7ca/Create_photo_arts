@@ -21,6 +21,10 @@
   color: #295BA7;
 }
 
+.count  {
+  color: #000;
+}
+
 .btn-gest  {
   background-color: #b032EB;
   color: #fff;
@@ -58,5 +62,15 @@
 
 .btn-sarch:hover  {
   background-color: #211572;
+  color: #fff;
+}
+
+.btn-comment_delete  {
+  background-color: #b0c4de;
+  color: #fff;
+}
+
+.btn-comment_delete:hover  {
+  background-color: #BAD3FF;
   color: #fff;
 }

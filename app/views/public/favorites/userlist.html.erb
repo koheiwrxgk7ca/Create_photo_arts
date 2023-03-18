@@ -1,1 +1,10 @@
-<%= render 'public/users/users_table', users: @favorites %>
+  <div style = "background-color: #FFF;">
+    <div class = "p-2">
+      <h3>FavoriteUsers</h3><br>
+    </div>
+
+    <div class = "pl-2 pr-2">
+      <!--ユーザー一覧-->
+      <%= render 'public/users/users_table', users: @users %>
+    </div>
+  </div>
