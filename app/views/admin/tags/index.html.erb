@@ -1,12 +1,12 @@
   <div style = "background-color: #FFF;">
     <div class = "p-2">
-      <h3>タグ一覧・追加</h3>
+      <h3>タグ一覧・追加</h3><br>
 
       <%= form_with model: @tag, url: admin_tags_path, local:true do |f| %>
         <%= f.label :tag_name, "タグ名" %>
         <%= f.text_field :tag_name, placeholder: "タグ名" %>
         <%= f.submit"新規登録", class:"btn btn-success" %>
-      <% end %>
+      <% end %><br>
 
       <table class= "table">
         <thead>

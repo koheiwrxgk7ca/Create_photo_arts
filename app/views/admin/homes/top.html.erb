@@ -16,7 +16,7 @@
                       ID <%= user.id %>
                     </div>
                     <div class = 'col-md-7'>
-                      <%= link_to admin_user_path(user) do %>
+                      <%= link_to admin_user_path(user), class:"user" do %>
                         <%= user.name %>
                       <% end %>
                     </div>

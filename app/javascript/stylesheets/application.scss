@@ -17,6 +17,10 @@
   border-radius: 15px;
 }
 
+.user  {
+  color: #295BA7;
+}
+
 .btn-gest  {
   background-color: #b032EB;
   color: #fff;
@@ -27,12 +31,32 @@
   color: #fff;
 }
 
-.btn-favorite {
+.btn-edit  {
+  background-color: #94AC3C;
+  color: #fff;
+}
+
+.btn-edit:hover  {
   background-color: #b0c4de;
+  color: #fff;
+}
+
+.btn-favorite {
+  background-color: #94AC3C;
   color: #fff;
 }
 
 .btn-favorite:hover {
   background-color: #b0c4de;
+  color: #fff;
+}
+
+.btn-sarch  {
+  background-color: #295BA7;
+  color: #fff;
+}
+
+.btn-sarch:hover  {
+  background-color: #211572;
   color: #fff;
 }

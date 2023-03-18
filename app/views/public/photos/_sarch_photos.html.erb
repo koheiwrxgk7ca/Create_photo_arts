@@ -7,7 +7,7 @@
         <%= f.collection_select :tag_id, Tag.all, :id, :tag_name, { include_blank: "タグ検索", selected: params[:tag_id] }, { class: "form-control" } %>
       </div>
       <div class = "col">
-        <%= f.submit "検索する", class: "btn btn-primary" %>
+        <%= f.submit "検索する", class: "btn btn-sarch" %>
       </div>
     </div>
   <% end %><br>
