@@ -36,22 +36,36 @@
               </div>
 
               <!--コメント件数-->
-              <div class = 'col'>
-                <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
-              </div>
+              <% if photo.prefectures == "神奈川県" %>
+                <div class = 'col ml-4'>
+                  <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+                </div>
+              <% elsif photo.prefectures == "和歌山県" %>
+                <div class = 'col ml-4'>
+                  <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+                </div>
+              <% elsif photo.prefectures == "鹿児島県" %>
+                <div class = 'col ml-4'>
+                  <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+                </div>
+              <% else %>
+                <div class = 'col'>
+                  <i class="far fa-comment-dots"></i> <%= photo.comments.count %>
+                </div>
+              <% end %>
 
               <!--未選択は表示させない-->
               <% if photo.prefectures == "未選択" %>
               <% elsif photo.prefectures == "神奈川県" %>
-                <div class = 'col-5'>
+                <div class = 'col-5 pl-4'>
                   <i class="fas fa-map-marker-alt"></i> <%= photo.prefectures %>
                 </div>
               <% elsif photo.prefectures == "和歌山県" %>
-                <div class = 'col-5'>
+                <div class = 'col-5 pl-4'>
                   <i class="fas fa-map-marker-alt"></i> <%= photo.prefectures %>
                 </div>
               <% elsif photo.prefectures == "鹿児島県" %>
-                <div class = 'col-5'>
+                <div class = 'col-5 pl-4'>
                   <i class="fas fa-map-marker-alt"></i> <%= photo.prefectures %>
                 </div>
               <% else %>

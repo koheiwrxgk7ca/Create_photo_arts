@@ -154,20 +154,18 @@
           <% else %>
           <% end %>
         </table>
-
-        <!--自分の投稿の場合編集と削除リンクを表示する-->
-        <div class = 'pl-2'>
+        <div class = 'pl-3'>
+          <!--いいね機能-->
+          <p id = "favorite_buttons_<%= @photo.id %>">
+            <%= render 'public/favorites/favorites', photo: @photo %>
+          </p>
+          <!--自分の投稿の場合編集と削除リンクを表示する-->
           <% if @photo.user == current_user %>
             <br>
             <%= link_to "Edit", edit_photo_path(@photo.id), class:"btn btn-sm btn-success" %>
             |
             <%= link_to "Destroy", photo_path(@photo), method: :delete, "data-confirm" => "really?", class:"btn btn-sm btn-danger" %>
-          <% end %><br>
-
-          <!--いいね機能-->
-          <p id = "favorite_buttons_<%= @photo.id %>">
-            <%= render 'public/favorites/favorites', photo: @photo %>
-          </p>
+          <% end %>
         </div>
       </div>
     </div>

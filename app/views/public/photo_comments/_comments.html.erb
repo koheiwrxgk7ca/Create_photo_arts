@@ -13,6 +13,8 @@
           <td>
             <%= comment.photo_comment %>
           </td>
+        </tr>
+        <tr>
           <% if comment.user == current_user %>
           <td>
             <%= link_to "削除", photo_comment_path(comment.photo, comment), method: :delete, remote: true %>
