@@ -1,5 +1,6 @@
 class Public::PhotosController < ApplicationController
   before_action :authenticate_user!, except: [:destroy]
+  before_action :baria_user, only: [:edit, :update]
   def new
     @photo = Photo.new
   end
@@ -69,8 +70,12 @@ class Public::PhotosController < ApplicationController
     # 削除した際の遷移先指定
     if user_signed_in?
      @photo = Photo.find(params[:id])
-     @photo.destroy
-     redirect_to current_user
+     if @photo.user != current_user
+      redirect_to  current_user
+     else
+      @photo.destroy
+      redirect_to current_user
+     end
     elsif admin_signed_in?
      @photo = Photo.find(params[:id])
      @photo.destroy
@@ -85,5 +90,11 @@ class Public::PhotosController < ApplicationController
 
   def photo_params
     params.require(:photo).permit(:tag_id, :tag_relation_id, :user_id, :camera_name, :focal_length, :focal_number, :shutter_speed, :iso, :accessory, :edit_pictuer, :opinion, :prefectures, :region, :photo_image, tag_ids: [])
+  end
+
+  def baria_user
+    unless Photo.find(params[:id]).user.id.to_i == current_user.id
+      redirect_to current_user
+    end
   end
 end

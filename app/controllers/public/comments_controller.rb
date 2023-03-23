@@ -10,8 +10,12 @@ class Public::CommentsController < ApplicationController
 
   def destroy
     if user_signed_in?
-      Comment.find_by(id: params[:id], photo_id: params[:photo_id]).destroy
       @photo = Photo.find(params[:photo_id])
+      # if Comment.user != current_user
+        # redirect_to  current_user
+      # else
+        Comment.find_by(id: params[:id], photo_id: params[:photo_id]).destroy
+      # end
     elsif admin_signed_in?
       Comment.find_by(id: params[:id], photo_id: params[:photo_id]).destroy
       redirect_to request.referer
