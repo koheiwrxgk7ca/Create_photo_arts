@@ -21,8 +21,8 @@ class Photo < ApplicationRecord
 
 
   validates :photo_image, presence: true
-  validates :focal_length, presence: true
-  validates :focal_number, presence: true
+  validates :focal_length, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :focal_number, presence: true, numericality: {only_float: true, greater_than_or_equal_to: 0.5, less_than_or_equal_to: 32}
   validates :shutter_speed, presence: true
   validates :iso, presence: true
   validates :accessory, presence: true

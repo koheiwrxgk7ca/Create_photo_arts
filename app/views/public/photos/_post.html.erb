@@ -9,10 +9,11 @@
 
   <%= form_with model:photo, url: path, local:true do |f| %>
 
-    <p>*は入力必須です</p>
+    <p><span class = text-danger>*</span> は入力必須です</p>
 
     <div class = "form-group">
-      <%= f.label :photo_image, "*写真" %>
+      <span class = text-danger>*</span>
+      <%= f.label :photo_image, "写真" %>
       <%= f.file_field :photo_image, class: "form-control-file photo_image", accept: 'image/*' %>
     </div>
 
@@ -24,36 +25,42 @@
 
 
       <div class = "col-lg-3">
-        <%= f.label :focal_length, "*焦点距離" %><br>
+        <span class = text-danger>*</span>
+        <%= f.label :focal_length, "焦点距離" %><br>
         <%= f.text_field :focal_length, placeholder: "焦点距離" %>
       </div>
     </div>
 
     <div class = "row">
       <div class = "col-lg-3">
-        <%= f.label :focal_number, "*F値" %><br>
+        <span class = text-danger>*</span>
+        <%= f.label :focal_number, "F値" %><br>
         <%= f.text_field :focal_number, placeholder: "F値" %>
       </div>
 
       <div class ="col-lg-3">
-        <%= f.label :shutter_speed, "*SS"%><br>
+        <span class = text-danger>*</span>
+        <%= f.label :shutter_speed, "SS"%><br>
         <%= f.text_field :shutter_speed, placeholder: "シャッタースピード" %>
       </div>
 
       <div class = "col-lg-3">
-        <%= f.label :iso, "*ISO感度" %><br>
+        <span class = text-danger>*</span>
+        <%= f.label :iso, "ISO感度" %><br>
         <%= f.text_field :iso, placeholder: "ISO感度" %>
       </div>
     </div>
 
     <div class = "row">
       <div class = "col-lg-3">
-        <%= f.label :accessory, "*周辺機器" %><br>
+        <span class = text-danger>*</span>
+        <%= f.label :accessory, "周辺機器" %><br>
         <%= f.text_field :accessory, placeholder: "フィルター、ストロボ等" %>
       </div>
 
       <div class = "col-lg-3">
-        <%= f.label :edit_pictuer, "*編集" %><br>
+        <span class = text-danger>*</span>
+        <%= f.label :edit_pictuer, "編集" %><br>
         <%= f.select :edit_pictuer, [['なし',0],['あり',1]], { include_blank: true, selected: 0 } %>
       </div>
     </div>

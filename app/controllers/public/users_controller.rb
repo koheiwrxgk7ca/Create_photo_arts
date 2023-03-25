@@ -24,6 +24,11 @@ class Public::UsersController < ApplicationController
   end
 
   def update
+    user_id = params[:id].to_i
+    login_user_id = current_user.id
+   if(user_id != login_user_id)
+    redirect_to current_user
+   end
     @user = User.find(params[:id])
     @user.update(user_params)
     redirect_to user_path(@user.id)
