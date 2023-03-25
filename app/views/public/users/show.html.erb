@@ -15,57 +15,61 @@
 
     <div class='row align-items-end pl-2'>
       <div class="col-sm=5 col-md-10 col-lg-4">
-        <!--ユーザーのプロフィール写真-->
-        <%= image_tag @user.get_profile_image, size: '100x100' %><br>
-        <!--ユーザーネーム-->
-        <%= @user.name %><br><br>
+        <% if @user.is_deleted == false %>
+          <!--ユーザーのプロフィール写真-->
+          <%= image_tag @user.get_profile_image, size: '100x100' %><br>
+          <!--ユーザーネーム-->
+          <%= @user.name %><br><br>
 
-        <div class="mr-4">
-          <div class="d-flex justify-content-between">
-            <span>投稿</span>
-            <span><%= @user.photos.count %></span>
+          <div class="mr-4">
+            <div class="d-flex justify-content-between">
+              <span>投稿</span>
+              <span><%= @user.photos.count %></span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span><%= link_to"フォロワー",user_followers_path(@user), class:"user" %></span>
+              <span><%= @user.followers.count %></span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span><%= link_to"フォロー",user_followings_path(@user), class:"user" %></span>
+              <span><%= @user.followings.count %></span>
+            </div>
           </div>
-          <div class="d-flex justify-content-between">
-            <span><%= link_to"フォロワー",user_followers_path(@user), class:"user" %></span>
-            <span><%= @user.followers.count %></span>
-          </div>
-          <div class="d-flex justify-content-between">
-            <span><%= link_to"フォロー",user_followings_path(@user), class:"user" %></span>
-            <span><%= @user.followings.count %></span>
-          </div>
+
+          <!--自己紹介文-->
+          <% if @user.introduction.present? %>
+            <%= @user.introduction %><br><br>
+          <% else %>
+            <br>
+          <% end %>
         </div>
 
-        <!--自己紹介文-->
-        <% if @user.introduction.present? %>
-          <%= @user.introduction %><br><br>
-        <% else %>
-          <br>
-        <% end %>
-      </div>
-
-      <div class ='col-lg-6'>
-      <!--マイページなら編集リンクを、他のユーザーならフォローリンクを表示-->
-        <% if @user == current_user %>
-          <div class='row'>
-            <div class='col-sm-6'>
-              <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-edit" %></p>
-            </div>
-            <div class='col-md-6'>
-              <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-favorite" %></p>
-            </div>
-          </div>
-        <% else %>
-          <div class='row'>
-            <div class='col-sm-6'>
-              <!--relationship非同期-->
-              <div id = "relationship_buttons_<%= @user.id %>">
-                <%= render 'public/relationships/relationships', user: @user %>
+        <div class ='col-lg-6'>
+        <!--マイページなら編集リンクを、他のユーザーならフォローリンクを表示-->
+          <% if @user == current_user %>
+            <div class='row'>
+              <div class='col-sm-6'>
+                <p><%= link_to "プロフィール編集",edit_user_path(@user), class:"btn btn-sm btn-edit" %></p>
+              </div>
+              <div class='col-md-6'>
+                <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-favorite" %></p>
               </div>
             </div>
-            <div class='col-md-6'>
-              <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-favorite" %></p>
+          <% else %>
+            <div class='row'>
+              <div class='col-sm-6'>
+                <!--relationship非同期-->
+                <div id = "relationship_buttons_<%= @user.id %>">
+                  <%= render 'public/relationships/relationships', user: @user %>
+                </div>
+              </div>
+              <div class='col-md-6'>
+                <p><%=link_to"いいね一覧",favorites_user_path(@user), class:"btn btn-sm btn-favorite" %></p>
+              </div>
             </div>
-          </div>
+          <% end %>
+        <% else %>
+          退会済のユーザー<br><br>
         <% end %>
 
         <p>投稿一覧</p>
